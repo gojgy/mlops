@@ -14,7 +14,7 @@ import time
 from pathlib import Path
 
 from src.config import load_params
-from src.model import generate, load_model
+from src.model import generate, load_model, set_seed
 
 
 def peak_rss_mb() -> float:
@@ -29,23 +29,27 @@ def peak_rss_mb() -> float:
 def main() -> None:
     params = load_params()
     prompt = params["bench"]["prompt"]
+    set_seed(params["generate"]["seed"])
 
-    # TODO: разделить замеры. Сейчас в одном таймере и загрузка, и генерация.
+    # Загрузка.
     t0 = time.perf_counter()
     tokenizer, model = load_model(params)
+    load_time = time.perf_counter() - t0
 
-    # TODO: добавить прогрев перед измерением.
+    # Прогрев, в замер не входит.
+    for _ in range(params["bench"]["warmup_runs"]):
+        generate(tokenizer, model, params, prompt)
+
+    # Генерация, таймер на каждый прогон.
     speeds = []
     for _ in range(params["bench"]["measure_runs"]):
+        t = time.perf_counter()
         _, n_tokens = generate(tokenizer, model, params, prompt)
-        elapsed = time.perf_counter() - t0
-        speeds.append(n_tokens / elapsed)
-
-    load_time = 0.0
+        speeds.append(n_tokens / (time.perf_counter() - t))
 
     # Медиана устойчивее среднего к одиночному выбросу.
     report = {
-        "model": "Qwen/Qwen3-0.6B",
+        "model": params["model"]["name"],
         "device": str(model.device),
         "dtype": params["model"]["dtype"],
         "load_time_sec": round(load_time, 2),
