@@ -1,0 +1,107 @@
+# Единственная точка конфигурации ДЗ 3.
+# Ни один путь, порог или размер среза не должен появляться в коде строкой.
+
+collect:
+  # Версия датасета переключается ЗДЕСЬ. Всё остальное — следствие.
+  version: "v2"              # v1 | v2
+
+  # Источник: выгрузка метаданных arXiv (CC0), первый parquet-шард зеркала
+  # на HuggingFace — 433 421 статья, апрель 2007 — май 2013. Качает стадия fetch.
+  source:
+    url: "https://huggingface.co/api/datasets/gfissore/arxiv-abstracts-2021/parquet/default/train/0.parquet"
+    sha256: "1598a0077f5e8090a732e60de399e5bcde12a0d9adb624126939afdd2f4d9790"
+    path: "source/arxiv_abstracts_0.parquet"
+
+  # Версии отличаются только окном лет подачи (год берётся из id). v2 включает v1.
+  versions:
+    v1:
+      years: [2007, 2009]
+    v2:
+      years: [2007, 2012]
+
+  # --- Переработка источника: каждый параметр — счётчик в metrics/collect.json ---
+  archives: ["cs", "math", "stat"]   # сужение по основной категории. Один cs не проходит
+                             # гейт: 40 категорий (< 50), cs.IT — 18,7% (> 10%).
+  sample_share: 0.5          # выборка по sha1(id): воспроизводима, v2 ⊇ v1. Не меньше —
+                             # пара дублей переживает выборку с вероятностью share².
+  min_abstract_chars: 200    # короче — заглушка, а не аннотация
+  drop_withdrawn: true       # «This paper has been withdrawn…»
+  drop_derivative_titles: true   # «Part II», «Erratum», «Comment on…» — не выводятся из аннотации
+  drop_title_in_abstract: true   # заголовок дословно стоит в аннотации — ответ в промпте
+
+  system_prompts:            # в источнике инструкции нет; вариант выбирается по id
+    - "You are a scientific editor. Read the abstract of a research paper and write a title for it. Reply with the title only."
+    - "Given the abstract of an arXiv paper, produce a concise, informative title. Output only the title, with no quotes or explanations."
+    - "Task: title generation. The user message contains the abstract of a paper. Answer with a single line: the title the authors could have given it."
+    - "You help researchers name their papers. Based on the abstract below, suggest one title in the style of arXiv. Do not add anything except the title."
+    - "Write the title of the scientific paper whose abstract is provided. Keep it specific to the content of the abstract and return just the title."
+
+clean:
+  # Фильтр длин: слишком короткий пример — обрезок, слишком длинный — выброс.
+  min_user_chars: 30
+  max_user_chars: 4000
+  min_assistant_chars: 2
+  near_dup:
+    enabled: true
+    shingle_words: 4         # длина словного шингла
+    num_perm: 64             # перестановок MinHash: точность против скорости
+    threshold: 0.85          # Жаккар выше порога — почти-дубль
+  pii:
+    enabled: true            # стадия обязательна, даже если счётчик нулевой
+
+diversity:
+  # Пороги, которым обязан удовлетворять ОЧИЩЕННЫЙ датасет. Стадия diversity
+  # падает, если нарушен хоть один: набор из 30 однотипных строк проходит
+  # и схему, и дедупликацию, и сплит — формально он безупречен и бесполезен.
+  # Разбор такого случая: один системный промпт на все строки, ответы длиной
+  # 356–440 символов, сквозные слова во всех ответах. Лосс на нём падает,
+  # а модель выучивает шаблон вместо задачи.
+  #
+  # Пороги — не догма: их можно менять под свою задачу, но только в эту сторону
+  # и только с обоснованием в docs/datasheet.md. «Снизил, чтобы позеленело» —
+  # не обоснование.
+
+  min_examples: 1000         # строк после очистки. Меньше — модель увидит
+                             # каждый пример по нескольку раз за эпоху.
+  min_system_prompts: 3      # различных системных промптов
+  min_groups: 50             # различных групп (split.group_key)
+  max_group_share: 0.10      # доля крупнейшей группы: одна тема не должна
+                             # решать за весь датасет
+  min_answer_len_ratio: 1.6  # p90/p10 длин ответа ассистента. Ответы одной
+                             # длины — верный признак сгенерированного шаблона.
+                             # Если у вашей задачи ответы законно однотипные
+                             # (метки классов, да/нет) — снижайте порог и
+                             # покажите разнообразие на другой оси в datasheet.
+  max_same_length_share: 0.25   # доля примеров с самой частой длиной ответа
+  max_duplicate_answer_share: 0.30  # доля ответов-повторов (точные совпадения)
+
+split:
+  # Группа сплита — основная категория arXiv: test состоит из областей науки,
+  # которых модель не видела.
+  group_key: "topic"
+  ratios:
+    train: 0.8
+    val: 0.1
+    test: 0.1
+  seed: 42
+  max_eval_group_share: 0.25 # группа крупнее этой доли целевого объёма val/test идёт
+                             # только в train: иначе одна категория занимает полтеста.
+
+contamination:
+  # Порог поиска near-dup пересечений train/test.
+  # Обязан совпадать с clean.near_dup.threshold. Более строгий порог здесь
+  # ловил бы не контаминацию, а разницу порогов: пары с Жаккаром между
+  # порогом чистки и порогом проверки очистку проходят законно.
+  threshold: 0.85
+
+paths:
+  raw: "data/raw.jsonl"
+  clean: "data/clean.jsonl"
+  train: "data/train.jsonl"
+  val: "data/val.jsonl"
+  test: "data/test.jsonl"
+  metrics_collect: "metrics/collect.json"
+  metrics_clean: "metrics/clean.json"
+  metrics_split: "metrics/split.json"
+  metrics_diversity: "metrics/diversity.json"
+  datasheet: "docs/datasheet.md"

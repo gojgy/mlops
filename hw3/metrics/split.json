@@ -1,0 +1,39 @@
+{
+  "version": "v2",
+  "seed": 42,
+  "group_key": "topic",
+  "groups_total": 75,
+  "max_eval_group_share": 0.25,
+  "sizes": {
+    "train": 45772,
+    "val": 5736,
+    "test": 5940
+  },
+  "groups": {
+    "train": 49,
+    "val": 13,
+    "test": 13
+  },
+  "largest_group_share": {
+    "train": 0.0824,
+    "val": 0.2038,
+    "test": 0.2271
+  },
+  "ratios_actual": {
+    "train": 0.7968,
+    "val": 0.0998,
+    "test": 0.1034
+  },
+  "contamination": {
+    "id_overlap": 0,
+    "text_overlap": 0,
+    "group_overlap": 0,
+    "near_dup_pairs": 0,
+    "examples": {
+      "id": [],
+      "group": [],
+      "near_dup": []
+    }
+  },
+  "seconds": 8.83
+}

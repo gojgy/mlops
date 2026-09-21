@@ -1,0 +1,120 @@
+# Пайплайн ДЗ 3: fetch → collect → clean → diversity → split → contamination.
+#
+# Два правила, из-за нарушения которых пайплайн «не пересчитывается»:
+#   deps — всё, от чего зависит результат: входные данные И код стадии;
+#   params — секции params.yaml, при изменении которых стадия обязана
+#            переисполниться (пути к источникам живут там, а не в deps).
+# Пути в outs дублируют paths.* из params.yaml: dvc.yaml не умеет читать
+# params, поэтому согласованность проверяется в tests/check.sh.
+
+stages:
+  # persist: 300 МБ источника не перекачиваются при каждом запуске
+  fetch:
+    cmd: python -m src.fetch
+    deps:
+      - src/fetch.py
+      - src/config.py
+    params:
+      - collect.source
+    outs:
+      - source/arxiv_abstracts_0.parquet:
+          persist: true
+
+  collect:
+    cmd: python -m src.collect
+    deps:
+      - source/arxiv_abstracts_0.parquet
+      - src/collect.py
+      - src/textnorm.py
+      - src/config.py
+    params:
+      # без этой секции смена collect.version не инвалидирует стадию
+      - collect
+      - paths.raw
+      - paths.metrics_collect
+    outs:
+      - data/raw.jsonl
+    metrics:
+      - metrics/collect.json:
+          cache: false
+
+  clean:
+    cmd: python -m src.clean
+    deps:
+      - data/raw.jsonl
+      - src/clean.py
+      - src/dedup.py
+      - src/pii.py
+      - src/schema.py
+      - src/textnorm.py
+      - src/config.py
+    params:
+      - clean
+      - paths.raw
+      - paths.clean
+      - paths.metrics_clean
+    outs:
+      - data/clean.jsonl
+    metrics:
+      - metrics/clean.json:
+          cache: false
+
+  diversity:
+    cmd: python -m src.diversity
+    deps:
+      - data/clean.jsonl
+      - src/diversity.py
+      - src/stats.py
+      - src/schema.py
+      - src/textnorm.py
+      - src/config.py
+    params:
+      - diversity
+      - split.group_key
+      - paths.clean
+    metrics:
+      - metrics/diversity.json:
+          cache: false
+
+  split:
+    cmd: python -m src.split
+    deps:
+      - data/clean.jsonl
+      - src/split.py
+      - src/contamination.py
+      - src/dedup.py
+      - src/schema.py
+      - src/textnorm.py
+      - src/config.py
+    params:
+      - split
+      - contamination
+      - clean.near_dup
+      - paths.clean
+      - paths.train
+      - paths.val
+      - paths.test
+    outs:
+      - data/train.jsonl
+      - data/val.jsonl
+      - data/test.jsonl
+    metrics:
+      - metrics/split.json:
+          cache: false
+
+  contamination:
+    cmd: python scripts/check_contamination.py
+    deps:
+      - data/train.jsonl
+      - data/test.jsonl
+      - scripts/check_contamination.py
+      - src/contamination.py
+      - src/dedup.py
+      - src/schema.py
+      - src/textnorm.py
+      - src/config.py
+    params:
+      - contamination
+      - clean.near_dup
+      - paths.train
+      - paths.test
