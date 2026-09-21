@@ -1,21 +1,21 @@
 {
-  "version": "v1",
-  "examples": 20474,
+  "version": "v2",
+  "examples": 57448,
   "system_prompts": 5,
-  "groups": 72,
+  "groups": 75,
   "largest_group": "math.pr",
-  "largest_group_share": 0.0721,
+  "largest_group_share": 0.0657,
   "answer_len": {
-    "p10": 37,
-    "p50": 61,
-    "p90": 95,
-    "ratio_p90_p10": 2.57,
-    "cv": 0.363,
-    "min": 6,
-    "max": 217
+    "p10": 38,
+    "p50": 63,
+    "p90": 96,
+    "ratio_p90_p10": 2.53,
+    "cv": 0.36,
+    "min": 4,
+    "max": 239
   },
-  "same_length_share": 0.0196,
-  "duplicate_answer_share": 0.0001,
+  "same_length_share": 0.0181,
+  "duplicate_answer_share": 0.0002,
   "thresholds": {
     "min_examples": 1000,
     "min_system_prompts": 3,
@@ -27,5 +27,5 @@
   },
   "violations": [],
   "passed": true,
-  "seconds": 0.28
+  "seconds": 0.89
 }

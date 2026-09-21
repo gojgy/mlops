@@ -1,8 +1,8 @@
 {
-  "version": "v1",
+  "version": "v2",
   "years": [
     2007,
-    2009
+    2012
   ],
   "archives": [
     "cs",
@@ -10,16 +10,16 @@
     "stat"
   ],
   "rows_scanned": 433421,
-  "rows_written": 20488,
+  "rows_written": 57509,
   "dropped_archive_filter": 290999,
-  "dropped_year_filter": 96745,
-  "dropped_withdrawn": 195,
-  "dropped_short_abstract": 3187,
-  "dropped_derivative_title": 150,
-  "dropped_title_in_abstract": 1405,
-  "dropped_not_sampled": 20252,
-  "titles_unwrapped": 6650,
-  "topics": 72,
+  "dropped_year_filter": 15189,
+  "dropped_withdrawn": 310,
+  "dropped_short_abstract": 7452,
+  "dropped_derivative_title": 390,
+  "dropped_title_in_abstract": 4028,
+  "dropped_not_sampled": 57544,
+  "titles_unwrapped": 19922,
+  "topics": 75,
   "system_prompt_variants": 5,
-  "seconds": 2.23
+  "seconds": 5.33
 }
