@@ -10,31 +10,30 @@ def load_params(path: str = "params.yaml") -> dict:
     return yaml.safe_load(Path(path).read_text(encoding="utf-8"))
 
 
-def source_files(params: dict) -> list[Path]:
-    """Файлы-источники для текущей версии датасета.
+def source_file(params: dict) -> Path:
+    """Файл-источник. Его кладёт стадия fetch; collect только читает."""
+    path = Path(params["collect"]["source"]["path"])
+    if not path.exists():
+        raise SystemExit(
+            f"стадия collect не нашла источник: {path}\n"
+            "Его скачивает стадия fetch: запустите `dvc repro` целиком\n"
+            "или `dvc repro fetch` отдельно."
+        )
+    return path
+
+
+def version_window(params: dict) -> tuple[int, int]:
+    """Окно лет текущей версии датасета, границы включительно.
 
     Версия живёт в params, а не в аргументах командной строки: иначе
     dvc.lock не запомнит, из чего собран артефакт.
     """
     version = params["collect"]["version"]
-    sources = params["collect"]["sources"]
-    if version not in sources:
+    versions = params["collect"]["versions"]
+    if version not in versions:
         raise SystemExit(
-            f"collect.version = {version!r}, но в collect.sources "
-            f"есть только {sorted(sources)}"
+            f"collect.version = {version!r}, но в collect.versions "
+            f"есть только {sorted(versions)}"
         )
-    files = [Path(p) for p in sources[version]]
-    missing = [f for f in files if not f.exists()]
-    if missing:
-        # Первое, обо что спотыкается каждый: пакет приходит настроенным на
-        # курсовой датасет, которого у студента нет. Сообщение должно говорить,
-        # что делать, а не печатать FileNotFoundError с чужим абсолютным путём.
-        raise SystemExit(
-            "стадия collect не нашла источник:\n  "
-            + "\n  ".join(str(f) for f in missing)
-            + "\n\nТак и должно быть, если вы ещё не подключили СВОЙ датасет.\n"
-              "Что сделать: переписать src/collect.py под свой источник и\n"
-              "указать пути в params.yaml → collect.sources. Остальные стадии\n"
-              "работают с контрактом raw.jsonl и правок не требуют."
-        )
-    return files
+    first, last = versions[version]["years"]
+    return first, last

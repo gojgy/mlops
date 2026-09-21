@@ -1,4 +1,4 @@
-# Пайплайн ДЗ 3: collect → clean → diversity → split.
+# Пайплайн ДЗ 3: fetch → collect → clean → diversity → split → contamination.
 #
 # Два правила, из-за нарушения которых пайплайн «не пересчитывается»:
 #   deps — всё, от чего зависит результат: входные данные И код стадии;
@@ -8,19 +8,40 @@
 # params, поэтому согласованность проверяется в tests/check.sh.
 
 stages:
+  # persist: 300 МБ источника не перекачиваются при каждом запуске
+  fetch:
+    cmd: python -m src.fetch
+    deps:
+      - src/fetch.py
+      - src/config.py
+    params:
+      - collect.source
+    outs:
+      - source/arxiv_abstracts_0.parquet:
+          persist: true
+
   collect:
     cmd: python -m src.collect
     deps:
-      # TODO: добавить сюда путь к СВОЕМУ источнику данных.
-      # Без этого dvc не заметит, что источник изменился, и не пересчитает стадию.
+      - source/arxiv_abstracts_0.parquet
       - src/collect.py
+      - src/textnorm.py
       - src/config.py
+    params:
+      # без этой секции смена collect.version не инвалидирует стадию
+      - collect
+      - paths.raw
+      - paths.metrics_collect
     outs:
       - data/raw.jsonl
+    metrics:
+      - metrics/collect.json:
+          cache: false
 
   clean:
     cmd: python -m src.clean
     deps:
+      - data/raw.jsonl
       - src/clean.py
       - src/dedup.py
       - src/pii.py
@@ -29,7 +50,9 @@ stages:
       - src/config.py
     params:
       - clean
+      - paths.raw
       - paths.clean
+      - paths.metrics_clean
     outs:
       - data/clean.jsonl
     metrics:
@@ -66,11 +89,32 @@ stages:
     params:
       - split
       - contamination
+      - clean.near_dup
+      - paths.clean
       - paths.train
       - paths.val
       - paths.test
     outs:
       - data/train.jsonl
+      - data/val.jsonl
+      - data/test.jsonl
     metrics:
       - metrics/split.json:
           cache: false
+
+  contamination:
+    cmd: python scripts/check_contamination.py
+    deps:
+      - data/train.jsonl
+      - data/test.jsonl
+      - scripts/check_contamination.py
+      - src/contamination.py
+      - src/dedup.py
+      - src/schema.py
+      - src/textnorm.py
+      - src/config.py
+    params:
+      - contamination
+      - clean.near_dup
+      - paths.train
+      - paths.test

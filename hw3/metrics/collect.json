@@ -1,0 +1,25 @@
+{
+  "version": "v1",
+  "years": [
+    2007,
+    2009
+  ],
+  "archives": [
+    "cs",
+    "math",
+    "stat"
+  ],
+  "rows_scanned": 433421,
+  "rows_written": 20488,
+  "dropped_archive_filter": 290999,
+  "dropped_year_filter": 96745,
+  "dropped_withdrawn": 195,
+  "dropped_short_abstract": 3187,
+  "dropped_derivative_title": 150,
+  "dropped_title_in_abstract": 1405,
+  "dropped_not_sampled": 20252,
+  "titles_unwrapped": 6650,
+  "topics": 72,
+  "system_prompt_variants": 5,
+  "seconds": 2.23
+}

@@ -14,8 +14,11 @@ v2:
 	uv run python scripts/set_version.py v2
 	uv run dvc repro
 
+# версии зафиксированы git-тегами; другие ревизии: make diff FROM=... TO=...
+FROM ?= hw3-data-v1
+TO ?= hw3-data-v2
 diff:
-	uv run dvc metrics diff
+	uv run dvc metrics diff $(FROM) $(TO)
 
 dag:
 	uv run dvc dag

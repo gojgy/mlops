@@ -125,17 +125,18 @@ def main() -> None:
     mpath.parent.mkdir(parents=True, exist_ok=True)
     mpath.write_text(json.dumps(metrics, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    if failed:
-        # TODO: гейт или отчёт? Стадия, которая сообщает о проблеме и продолжает,
-        # не мешает вырожденному набору доехать до обучения.
-        print("diversity: предупреждение — " + "; ".join(failed))
-
     print(
         f"diversity: {stats['examples']} строк, {stats['system_prompts']} системных промптов, "
         f"{stats['groups']} групп (крупнейшая {stats['largest_group_share']:.1%}), "
         f"разброс длин p90/p10 = {stats['answer_len']['ratio_p90_p10']}, "
         f"{metrics['seconds']} с"
     )
+
+    if failed:
+        raise SystemExit(
+            f"diversity: гейт закрыт, нарушено порогов: {len(failed)}\n"
+            + "\n".join(f"  - {item}" for item in failed)
+        )
 
 
 if __name__ == "__main__":
