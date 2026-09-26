@@ -5,9 +5,6 @@
 
 from typing import Any
 
-# Формат реплики Qwen3, выписан из карточки модели.
-TURN = "<|im_start|>{role}\n{content}<|im_end|>\n"
-
 
 def _template_kwargs(params: dict) -> dict:
     """Доп. аргументы шаблона, которые есть не у всех моделей.
@@ -46,13 +43,12 @@ def build_chat_text(
     """
     if add_generation_prompt:
         messages, _ = split_messages(messages)
-        return tokenizer.apply_chat_template(
-            messages,
-            tokenize=False,
-            add_generation_prompt=True,
-            **_template_kwargs(params),
-        )
-    return "".join(TURN.format(role=m["role"], content=m["content"]) for m in messages)
+    return tokenizer.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=add_generation_prompt,
+        **_template_kwargs(params),
+    )
 
 
 def prompt_token_len(

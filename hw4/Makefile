@@ -13,6 +13,10 @@ sample:
 tokenize:
 	uv run python -m src.tokenize_data
 
+# Токенизатор уже в кеше после make tokenize; онлайн-проверка списка шаблонов
+# в HF Hub при плохой сети висит до таймаута и валит проверки. HF_HUB_OFFLINE=0 make check — отключить.
+HF_HUB_OFFLINE ?= 1
+export HF_HUB_OFFLINE
 check:
 	bash tests/check.sh
 

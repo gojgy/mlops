@@ -2,7 +2,7 @@
 # Правится ЗДЕСЬ, а не в коде: в src/ не должно быть ни имени модели,
 # ни длин, ни порогов.
 model:
-  name: "Qwen/Qwen3-0.6B"
+  name: "Qwen/Qwen3-1.7B"
   # Qwen3 без этого флага ждёт от модели <think>-блок, и тогда шаблон
   # инференса перестаёт быть префиксом шаблона обучения. См. docs/tokenize_report.md.
   enable_thinking: false
@@ -22,7 +22,7 @@ sample:
   seed: 42
 
 tokenize:
-  max_seq_len: 232
+  max_seq_len: 512             # p99 длины train — 481 токен; при 232 обрезалось 35% примеров
   truncated_warn_ratio: 0.05
   padding_side: "left"
 
@@ -32,7 +32,7 @@ packing:
 
 train_estimate:
   epochs: 3
-  # 52 ток/с — замер ДЗ 1 на этой машине (Apple Silicon, Qwen3-0.6B, ГЕНЕРАЦИЯ).
+  # 23 ток/с — замер ДЗ 1 на этой машине (Apple Silicon M-series, Qwen3-1.7B bf16 на MPS, ГЕНЕРАЦИЯ).
   # Обучение медленнее: forward + backward + optimizer. Реальное число
   # подставляется сюда после первого прогона ДЗ 5.
-  tokens_per_sec: 52
+  tokens_per_sec: 23
