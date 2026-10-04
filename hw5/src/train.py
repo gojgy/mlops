@@ -22,8 +22,11 @@ from pathlib import Path
 
 # Потолок памяти Metal — до импорта torch. Без него mps занимает сколько дадут,
 # и на ноутбуке с 16–32 ГБ система уходит в своп вместо внятной ошибки.
-os.environ.setdefault("PYTORCH_MPS_HIGH_WATERMARK_RATIO", "0.5")
-os.environ.setdefault("PYTORCH_MPS_LOW_WATERMARK_RATIO", "0.4")   # нижний порог не выше верхнего
+from src.config import load_params
+
+memory_cfg = load_params()["model"]
+os.environ.setdefault("PYTORCH_MPS_HIGH_WATERMARK_RATIO", str(memory_cfg["mps_high_watermark"]))
+os.environ.setdefault("PYTORCH_MPS_LOW_WATERMARK_RATIO", str(memory_cfg["mps_low_watermark"]))   # нижний порог не выше верхнего
 
 import torch  # noqa: E402
 from peft import LoraConfig, get_peft_model
@@ -31,7 +34,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, get_cosine_schedul
 
 from src.config import load_params
 from src.data import LABEL_PAD_ID, batches, load_split
-from src.runtime import allocated_bytes, memory_metric, resolve_device, resolve_dtype
+from src.runtime import allocated_bytes, memory_metric, resolve_device, resolve_dtype, set_seed
 
 
 TRAIN_CODE = ("src/train.py", "src/data.py", "src/runtime.py", "src/config.py")
@@ -49,23 +52,30 @@ def inputs_fingerprint(params: dict) -> str:
         h.update(name.encode())
         h.update(Path(name).read_bytes())
     h.update(json.dumps({k: params.get(k) for k in TRAIN_PARAMS}, sort_keys=True).encode())
+    for name in ("train", "val"):
+        with Path(params["data"][name]).open("rb") as source:
+            for chunk in iter(lambda: source.read(1 << 20), b""):
+                h.update(chunk)
     return h.hexdigest()[:12]
 
 
 def lora_config(params: dict, n_layers: int, freeze_first: int) -> LoraConfig:
     cfg = params["lora"]
+    if not 0 <= freeze_first < n_layers:
+        raise ValueError("freeze_first должен быть в пределах числа слоёв")
     return LoraConfig(
         r=cfg["r"],
         lora_alpha=cfg["alpha"],
         lora_dropout=cfg["dropout"],
         target_modules=cfg["target_modules"],
         modules_to_save=cfg.get("modules_to_save"),
+        layers_to_transform=list(range(freeze_first, n_layers)),
         task_type="CAUSAL_LM",
     )
 
 
 @torch.no_grad()
-def evaluate(model, examples, pad_id, device, batch_size: int) -> float:
+def evaluate(model, examples, pad_id, device, batch_size: int, track_memory=None) -> float:
     """Средний лосс на токен по всему val-сплиту.
 
     Среднее по батчам нельзя: в батчах разное число токенов под маской.
@@ -79,12 +89,16 @@ def evaluate(model, examples, pad_id, device, batch_size: int) -> float:
         if n == 0:
             continue
         loss = model(**batch).loss
+        if track_memory:
+            track_memory()
         total += loss.item() * n
         count += n
     model.train()
     if device.type == "mps":
         torch.mps.empty_cache()   # логиты оценки не должны висеть в кэше до конца обучения
-    return total / max(count, 1)
+    if not count:
+        raise ValueError("В val нет токенов ответа")
+    return total / count
 
 
 def dir_size_mb(path: Path) -> float:
@@ -107,6 +121,7 @@ def main() -> None:
     tcfg = params["train"]
     max_steps = args.max_steps if args.max_steps is not None else tcfg.get("max_steps")
 
+    set_seed(tcfg["seed"])
     device = resolve_device(params["model"]["device"])
     dtype = resolve_dtype(params["model"]["dtype"])
 
@@ -115,6 +130,9 @@ def main() -> None:
     if args.val_limit:
         val_blob["examples"] = val_blob["examples"][:args.val_limit]
     pad_id = train_blob["pad_token_id"]
+    for blob in (train_blob, val_blob):
+        if blob.get("model") != params["model"]["name"]:
+            raise ValueError("Модель тензоров не совпадает с model.name")
 
     tokenizer = AutoTokenizer.from_pretrained(params["model"]["name"])
     model = AutoModelForCausalLM.from_pretrained(params["model"]["name"], dtype=dtype).to(device)
@@ -146,25 +164,37 @@ def main() -> None:
     )
 
     eval_bs = tcfg.get("eval_batch_size", tcfg["batch_size"])
-    base_val = None   # TODO: с чем сравнивать дообученную модель?
+    peak = allocated_bytes(device)
+
+    def track_memory():
+        nonlocal peak
+        peak = max(peak, allocated_bytes(device))
+
+    eval_started = time.perf_counter()
+    base_val = evaluate(model, val_blob["examples"], pad_id, device, eval_bs, track_memory)
+    base_eval_seconds = time.perf_counter() - eval_started
+    print(f"  шаг 0: val {base_val:.4f} ({base_eval_seconds:.1f} с)", flush=True)
     curve_train: list[list[float]] = []
-    curve_val: list[list[float]] = []
+    curve_val: list[list[float]] = [[0, round(base_val, 4)]]
     print(f"[{args.variant}] устройство {device}, обучаемых {trainable:,} из {total:,} "
           f"({trainable / total:.3%}); шагов {total_steps}")
 
-    peak = allocated_bytes(device)
     started = time.perf_counter()
-    step, micro, accum_loss, diverged = 0, 0, 0.0, False
-    eval_seconds = 0.0
+    step, accum_loss, diverged = 0, 0.0, False
+    eval_seconds = base_eval_seconds
+    train_eval_seconds = 0.0
+    seen_tokens = 0
     for epoch in range(tcfg["epochs"]):
-        for batch in batches(examples, tcfg["batch_size"], pad_id, shuffle=True, seed=tcfg["seed"] + epoch):
+        for micro_index, batch in enumerate(batches(examples, tcfg["batch_size"], pad_id, shuffle=True, seed=tcfg["seed"] + epoch)):
+            group_start = (micro_index // tcfg["grad_accum"]) * tcfg["grad_accum"]
+            group_size = min(tcfg["grad_accum"], micro_per_epoch - group_start)
+            seen_tokens += int(batch["attention_mask"].sum())
             batch = {k: v.to(device) for k, v in batch.items()}
-            loss = model(**batch).loss / tcfg["grad_accum"]
+            loss = model(**batch).loss / group_size
             loss.backward()
             accum_loss += loss.item()
-            micro += 1
             peak = max(peak, allocated_bytes(device))
-            if micro % tcfg["grad_accum"]:
+            if (micro_index + 1) % tcfg["grad_accum"] and micro_index + 1 != micro_per_epoch:
                 continue
             torch.nn.utils.clip_grad_norm_(model.parameters(), tcfg["max_grad_norm"])
             optimizer.step()
@@ -178,18 +208,26 @@ def main() -> None:
                 break
             accum_loss = 0.0
             if step % tcfg["eval_every"] == 0 or step == total_steps:
-                print(f"  шаг {step}/{total_steps}: train {curve_train[-1][1]:.4f}")
+                eval_started = time.perf_counter()
+                val_loss = evaluate(model, val_blob["examples"], pad_id, device, eval_bs, track_memory)
+                elapsed_eval = time.perf_counter() - eval_started
+                eval_seconds += elapsed_eval
+                train_eval_seconds += elapsed_eval
+                curve_val.append([step, round(val_loss, 4)])
+                print(f"  шаг {step}/{total_steps}: train {curve_train[-1][1]:.4f}, val {val_loss:.4f}", flush=True)
+            elif args.max_steps:
+                print(f"  шаг {step}/{total_steps}: train {curve_train[-1][1]:.4f}", flush=True)
             if step >= total_steps:
                 break
         if diverged or step >= total_steps:
             break
-    seconds = time.perf_counter() - started - eval_seconds   # чистое обучение, без замеров val
+    seconds = time.perf_counter() - started - train_eval_seconds   # чистое обучение, без замеров val
 
     out_root = Path(args.out) if args.out else Path(params["paths"]["models"])
     adapter_dir = out_root / f"adapter_{args.variant}"
     model.save_pretrained(adapter_dir)
+    tokenizer.save_pretrained(adapter_dir)
 
-    tokens = sum(len(e["input_ids"]) for e in examples) * tcfg["epochs"]
     metrics = {
         "variant": args.variant,
         "freeze_first": variant["freeze_first"],
@@ -200,6 +238,9 @@ def main() -> None:
         "lr": tcfg["lr"],
         "effective_batch": tcfg["batch_size"] * tcfg["grad_accum"],
         "steps": step,
+        "train_examples": len(examples),
+        "val_examples": len(val_blob["examples"]),
+        "processed_tokens": seen_tokens,
         "trainable_params": trainable,
         "total_params": total,
         "trainable_share": round(trainable / total, 6),
@@ -211,7 +252,7 @@ def main() -> None:
         "seconds": round(seconds, 1),
         "eval_seconds": round(eval_seconds, 1),
         "seconds_per_step": round(seconds / max(step, 1), 3),
-        "train_tokens_per_sec": round(tokens * min(1.0, step / max(total_steps, 1)) / seconds, 1) if seconds else 0,
+        "train_tokens_per_sec": round(seen_tokens / seconds, 1) if seconds else 0,
         "peak_memory_mb": round(peak / 1048576, 1),
         "memory_metric": memory_metric(device),
         "adapter_dir": str(adapter_dir),

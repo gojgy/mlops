@@ -1,0 +1,10 @@
+data:
+  train: data/experiment3k/train.pt
+  val: data/experiment3k/val.pt
+
+sample:
+  train_size: 3072
+
+paths:
+  models: models/experiment3k
+  metrics: metrics/experiment3k

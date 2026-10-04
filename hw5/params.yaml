@@ -1,12 +1,11 @@
 # Единственная точка конфигурации ДЗ 5. В src/ нет ни имени модели,
 # ни learning rate, ни путей.
 model:
-  name: "Qwen/Qwen3-0.6B"
+  name: "Qwen/Qwen3-1.7B"
   device: "auto"            # auto | cpu | cuda | mps
-  # Базовые веса в bfloat16: они заморожены, точность им не нужна, а память
-  # и время уходят вдвое. Сами матрицы LoRA peft держит в float32 — там идут
-  # крошечные обновления AdamW. На старом CPU без bf16 ставьте float32.
   dtype: "bfloat16"
+  mps_high_watermark: 0.7
+  mps_low_watermark: 0.4
   enable_thinking: false    # как в ДЗ 4: шаблон должен совпадать с обучением
 
 data:
@@ -14,27 +13,30 @@ data:
   train: "data/tokenized/train.pt"
   val: "data/tokenized/val.pt"
 
+sample:
+  source_train: "../hw4/data/tokenized/train.pt"
+  source_val: "../hw4/data/tokenized/val.pt"
+  train_size: 512
+  val_size: 128
+  seed: 42
+
 lora:
   r: 8
   alpha: 16                 # итоговый масштаб апдейта alpha / r = 2
   dropout: 0.05
-  # Только проекции внимания и MLP. embed_tokens и lm_head — это 155 млн
-  # параметров каждый; в modules_to_save они уезжают в адаптер целиком.
   target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
 
 train:
   seed: 42
   epochs: 1
-  batch_size: 2
-  grad_accum: 4             # эффективный батч = 8: память как у батча 2, шаг как у батча 8
-  lr: 1.0e-2
+  batch_size: 1
+  grad_accum: 8             # эффективный батч = 8
+  lr: 2.0e-4
   warmup_ratio: 0.03
   weight_decay: 0.0
   max_grad_norm: 1.0
   eval_every: 10            # шагов оптимизатора между замерами val loss
-  # Логиты на весь словарь: 2 примера x 512 токенов x 151 936 x 4 байта = 0,6 ГБ.
-  # Батч 8 на оценке — уже 2,5 ГБ одних логитов, и ноутбук уходит в своп.
-  eval_batch_size: 2
+  eval_batch_size: 1
   gradient_checkpointing: true   # без него на ноутбуке с 16–32 ГБ не влезает
   max_steps: null           # null — по эпохам; число — обрезать (smoke-тесты)
 
@@ -47,14 +49,55 @@ variants:
 
 compare:
   max_new_tokens: 40
-  # Пять фиксированных промптов: одни и те же для базовой модели и адаптера.
   prompts:
-    - "Тема:\nАртериальная гипертензия у взрослых\n\nВопрос:\nЦелевой уровень систолического АД у большинства пациентов моложе 65 лет составляет\n\nВарианты ответа:\n0. 150–159 мм рт. ст.\n1. 120–130 мм рт. ст.\n2. 140–149 мм рт. ст.\n3. менее 110 мм рт. ст."
-    - "Тема:\nСахарный диабет 2 типа у взрослых\n\nВопрос:\nПрепаратом первой линии при отсутствии противопоказаний является\n\nВарианты ответа:\n0. инсулин гларгин\n1. метформин\n2. глибенкламид\n3. акарбоза"
-    - "Тема:\nВнебольничная пневмония у взрослых\n\nВопрос:\nОсновным методом подтверждения диагноза пневмонии является\n\nВарианты ответа:\n0. общий анализ крови\n1. рентгенография органов грудной клетки\n2. бактериоскопия мокроты\n3. спирометрия"
-    - "Тема:\nЖелезодефицитная анемия\n\nВопрос:\nНаиболее информативный показатель запасов железа в организме\n\nВарианты ответа:\n0. сывороточное железо\n1. цветовой показатель\n2. ферритин сыворотки\n3. количество ретикулоцитов"
-    - "Тема:\nОстрый аппендицит у взрослых\n\nВопрос:\nСимптом Щёткина–Блюмберга указывает на\n\nВарианты ответа:\n0. раздражение брюшины\n1. кишечную непроходимость\n2. почечную колику\n3. холецистит"
-  system: "Ты отвечаешь на русскоязычные тестовые вопросы НМО. Дан вопрос и варианты ответа с нумерацией с 0. Выбери один правильный вариант. Ответь только номером варианта и текстом ответа, без объяснений."
+  - In the present paper, we consider the problem of matrix completion with noise. Unlike previous works,
+    we consider quite general sampling distribution and we do not need to know or to estimate the variance
+    of the noise. Two new nuclear-norm penalized estimators are proposed, one of them of "square-root"
+    type. We analyse their performance under high-dimensional scaling and provide non-asymptotic bounds
+    on the Frobenius norm error. Up to a logarithmic factor, these performance guarantees are minimax
+    optimal in a number of circumstances.
+  - Linear processes are defined as a discrete-time convolution between a kernel and an infinite sequence
+    of i.i.d. random variables. We modify this convolution by introducing decimation, that is, by stretching
+    time accordingly. We then establish central limit theorems for arrays of squares of such decimated
+    processes. These theorems are used to obtain the asymptotic behavior of estimators of the spectral
+    density at specific frequencies. Another application, treated elsewhere, concerns the estimation of
+    the long-memory parameter in time-series, using wavelets.
+  - In this paper, we develop an approach for the exact determination of the minimum sample size for the
+    estimation of a Poisson parameter with prescribed margin of error and confidence level. The exact
+    computation is made possible by reducing infinite many evaluations of coverage probability to finite
+    many evaluations. Such reduction is based on our discovery that the minimum of coverage probability
+    with respect to a Poisson parameter bounded in an interval is attained at a discrete set of finite
+    many values.
+  - An approach for engineering student exercises using the Internet is described. In this approach, for
+    a given exercise, each student receives the same problem, but with different data. The exercise content
+    can be static or dynamic, and the dynamic form can be timeless or real-time. The implementation provides
+    immediate feedback to the students, letting them know if their submitted answers are correct. Student
+    results for each exercise are recorded in log files which are available to the instructor. Example
+    exercises from engineering computer security and cryptography courses are presented.
+  - Sufficient conditions for global stabilization of nonlinear systems with delayed input by means of
+    approximate predictors are presented. An approximate predictor is a mapping which approximates the
+    exact values of the stabilizing input for the corresponding system with no delay. A systematic procedure
+    for the construction of approximate predictors is provided for globally Lipschitz systems. The resulting
+    stabilizing feedback can be implemented by means of a dynamic distributed delay feedback law. Illustrating
+    examples show the efficiency of the proposed control strategy.
+  system: Given the abstract of an arXiv paper, produce a concise, informative title. Output only the
+    title, with no quotes or explanations.
+  references:
+  - id: arxiv:1203.0108
+    topic: math.ST
+    title: Noisy low-rank matrix completion with general sampling distribution
+  - id: arxiv:0805.0779
+    topic: math.ST
+    title: Central Limit Theorems for arrays of decimated linear processes
+  - id: arxiv:0707.2116
+    topic: math.ST
+    title: Exact Computation of Minimum Sample size for Estimation of Poisson Parameters
+  - id: arxiv:1208.1969
+    topic: cs.CY
+    title: An Internet Approach for Engineering Student Exercises
+  - id: arxiv:0910.3757
+    topic: math.OC
+    title: Stabilization by Means of Approximate Predictors for Systems with Delayed Input
 
 paths:
   models: "models"
