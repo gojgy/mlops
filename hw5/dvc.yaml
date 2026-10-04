@@ -1,0 +1,143 @@
+# Стадии ДЗ 5 — продолжение пайплайна из ДЗ 3 и ДЗ 4:
+#   split (ДЗ 3) -> tokenize (ДЗ 4) -> train -> compare
+# deps — данные И код: забыть src/train.py — и правка цикла обучения
+# не пересчитает адаптер, dvc скажет «всё свежо».
+stages:
+  prepare:
+    cmd: python -m src.prepare_data
+    deps:
+      - ../hw4/data/tokenized/train.pt
+      - ../hw4/data/tokenized/val.pt
+      - src/prepare_data.py
+      - src/config.py
+    params:
+      - sample
+      - data
+    outs:
+      - data/tokenized/train.pt
+      - data/tokenized/val.pt
+
+  train_all:
+    cmd: python -m src.train --variant all_layers
+    deps:
+      - data/tokenized/train.pt
+      - data/tokenized/val.pt
+      - src/train.py
+      - src/data.py
+      - src/runtime.py
+      - src/config.py
+    params:
+      - model
+      - data
+      - paths
+      - lora
+      - train
+      - variants
+    outs:
+      - models/adapter_all_layers
+    metrics:
+      - metrics/train_all_layers.json:
+          cache: false
+
+  train_freeze:
+    cmd: python -m src.train --variant freeze14
+    deps:
+      - data/tokenized/train.pt
+      - data/tokenized/val.pt
+      - src/train.py
+      - src/data.py
+      - src/runtime.py
+      - src/config.py
+    params:
+      - model
+      - data
+      - paths
+      - lora
+      - train
+      - variants
+    outs:
+      - models/adapter_freeze14
+    metrics:
+      - metrics/train_freeze14.json:
+          cache: false
+
+  prepare_final:
+    cmd: python -m src.final prepare
+    deps:
+      - ../hw4/data/tokenized/train.pt
+      - ../hw4/data/tokenized/val.pt
+      - src/prepare_data.py
+      - src/config.py
+      - src/final.py
+      - params.final.yaml
+      - params.yaml
+    outs:
+      - data/experiment3k/train.pt
+      - data/experiment3k/val.pt
+
+  train_final:
+    cmd: python -m src.final train --variant all_layers
+    deps:
+      - data/experiment3k/train.pt
+      - data/experiment3k/val.pt
+      - src/train.py
+      - src/data.py
+      - src/runtime.py
+      - src/config.py
+      - src/final.py
+      - params.final.yaml
+      - params.yaml
+    outs:
+      - models/experiment3k/adapter_all_layers
+    metrics:
+      - metrics/experiment3k/train_all_layers.json:
+          cache: false
+
+  compare_control:
+    cmd: python -m src.compare --variant all_layers --out metrics/compare_all_layers.json
+    deps:
+      - models/adapter_all_layers
+      - src/compare.py
+      - src/config.py
+      - src/runtime.py
+    params:
+      - compare
+      - model
+      - paths
+    metrics:
+      - metrics/compare_all_layers.json:
+          cache: false
+
+  compare:
+    cmd: python -m src.final compare --variant all_layers
+    deps:
+      - models/experiment3k/adapter_all_layers
+      - src/final.py
+      - params.final.yaml
+      - params.yaml
+      - src/compare.py
+      - src/config.py
+      - src/runtime.py
+    params:
+      - compare
+      - model
+      - paths
+    outs:
+      - docs/compare.md:
+          cache: false
+    metrics:
+      - metrics/experiment3k/compare_all_layers.json:
+          cache: false
+
+  plot:
+    cmd: python -m src.plot
+    deps:
+      - metrics/train_all_layers.json
+      - metrics/train_freeze14.json
+      - src/plot.py
+      - src/config.py
+    params:
+      - paths
+    outs:
+      - docs/curves.png:
+          cache: false
