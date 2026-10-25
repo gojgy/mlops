@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+data/tokenized/
+data/eval/
+models/
+metrics/
+mlruns/
+mlartifacts/
+*.log
+.DS_Store
