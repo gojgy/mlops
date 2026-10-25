@@ -1,0 +1,5 @@
+[core]
+    analytics = false
+    remote = submission
+['remote "submission"']
+    url = ../context/submission/dvc-store

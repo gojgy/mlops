@@ -1,6 +1,7 @@
 .venv/
 __pycache__/
-data/
+data/tokenized/
+data/eval/
 models/
 metrics/
 mlruns/

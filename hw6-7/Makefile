@@ -10,7 +10,7 @@ sweep:
 promote:
 	uv run python -m evaluation.cli promote
 predict:
-	uv run python -m src.predict --uri models:/my-qwen-adapter@champion --prompt "Какой показатель отражает запасы железа?"
+	uv run python -m src.predict --uri models:/arxiv-title-qwen3-1-7b@champion --prompt "We study noisy low-rank matrix completion under general sampling distributions."
 check:
 	bash tests/check.sh
 check-storage:
@@ -35,4 +35,4 @@ check-all: check check-eval
 baseline-update:
 	uv run python -m evaluation.cli baseline-update
 predict-candidate:
-	uv run python -m src.predict --uri models:/my-qwen-adapter@candidate --prompt "Выберите правильный вариант."
+	uv run python -m src.predict --uri models:/arxiv-title-qwen3-1-7b@candidate --prompt "We study noisy low-rank matrix completion under general sampling distributions."

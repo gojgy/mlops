@@ -1,5 +1,8 @@
 """Один sweep — родительский run, каждый кандидат — отдельный дочерний run."""
+import argparse
 import json
+import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
@@ -39,18 +42,33 @@ def run_candidate(params, candidate, versions):
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--candidate')
+    ap.add_argument('--run-id')
+    args = ap.parse_args()
+    if bool(args.candidate) != bool(args.run_id):
+        ap.error('--candidate и --run-id задаются вместе')
     p = load_params()
     if len(p["sweep"]) < 6 or len({x["name"] for x in p["sweep"]}) != len(p["sweep"]):
         raise SystemExit("Нужно минимум шесть кандидатов с уникальными именами")
     if any(p["train"][k] <= 0 for k in ("max_steps", "train_limit", "val_limit", "batch_size", "grad_accum", "eval_every")):
         raise SystemExit("Бюджеты и размеры батча должны быть положительными")
     connect(p)
-    versions = {k: v for k, v in provenance(p).items() if not k.startswith("data_")}
+    versions = provenance(p)
+    if args.candidate:
+        candidate = next(c for c in p['sweep'] if c['name'] == args.candidate)
+        with mlflow.start_run(run_id=args.run_id):
+            run_candidate(p, candidate, versions)
+        return
     rows = []
     with mlflow.start_run(run_name="sweep", tags={"kind": "sweep", **versions}) as parent:
-        with mlflow.start_run(run_name="all-candidates", nested=True):
-            for candidate in p["sweep"]:
-                rows.append(run_candidate(p, candidate, versions))
+        for candidate in p["sweep"]:
+            with mlflow.start_run(run_name=candidate["name"], nested=True) as run:
+                # MLflow удерживает загруженную модель; отдельный процесс освобождает её веса.
+                subprocess.run([sys.executable, '-m', 'src.sweep', '--candidate', candidate['name'],
+                                '--run-id', run.info.run_id], check=True)
+                metrics = mlflow.get_run(run.info.run_id).data.metrics
+                rows.append(dict(run_id=run.info.run_id, name=candidate['name'], **metrics))
         mlflow.log_dict({"candidates": rows}, "comparison.json")
         result = {"parent_id": parent.info.run_id, "rows": rows, "provenance": versions}
     save_json("metrics/sweep.json", result)

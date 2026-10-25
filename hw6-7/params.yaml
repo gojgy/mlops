@@ -1,13 +1,13 @@
 # Один бюджет и один val для всех шести кандидатов. Это короткий учебный поиск.
 model:
-  name: Qwen/Qwen3-0.6B
-  revision: main   # run сохраняет разрешённый commit HF, а не только main
+  name: Qwen/Qwen3-1.7B
+  revision: 70d244cc86ccca08cf5af4e1e306ecf908b1ad5e
   device: auto
   dtype: bfloat16
   enable_thinking: false
 data:
-  train: data/tokenized/train.pt
-  val: data/tokenized/val.pt
+  train: ../hw4/data/tokenized/train.pt
+  val: ../hw4/data/tokenized/val.pt
 train:
   seed: 42
   max_steps: 4
@@ -31,13 +31,13 @@ tracking:
   uri: http://127.0.0.1:5006
   experiment: hw6-lora
 registry:
-  name: my-qwen-adapter
+  name: arxiv-title-qwen3-1-7b
   alias: champion
   # Порог относительный к базе на ТОМ ЖЕ val; меньше loss — лучше.
   max_val_ratio: 1.0
 generation:
-  max_new_tokens: 16
-  system: "Выбери один правильный вариант. Ответь номером и текстом ответа."
+  max_new_tokens: 40
+  system: "Given the abstract of an arXiv paper, produce a concise, informative title. Output only the title, with no quotes or explanations."
   prompts:
-    - "Метод подтверждения пневмонии: 0. общий анализ крови; 1. рентгенография грудной клетки; 2. спирометрия."
-    - "Показатель запасов железа: 0. сывороточное железо; 1. ферритин; 2. гемоглобин."
+    - "An approach for engineering student exercises using the Internet is described. In this approach, each student receives the same problem, but with different data. The implementation provides immediate feedback and records results for the instructor."
+    - "We study noisy low-rank matrix completion under a general sampling distribution. We propose nuclear-norm penalized estimators with minimax-optimal error bounds."
