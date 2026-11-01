@@ -1,0 +1,54 @@
+$ flow.py --workspace /Users/georjo/uni/сем7/mlops/hw8-10/context/flow-check --fail-after-prepare
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PREPARATION_STATE Completed
+22:14:59.937 | INFO    | prefect - Starting temporary server on http://127.0.0.1:8693
+See https://www.prefect.io/docs/v3/concepts/server#how-to-guides for more information on running a dedicated Prefect server.
+22:15:01.689 | INFO    | Flow run 'miraculous-koel' - Beginning flow run 'miraculous-koel' for flow 'model-release'
+22:15:01.701 | INFO    | Task run 'prepare-103' - Finished in state Completed()
+22:15:02.708 | ERROR   | Flow run 'miraculous-koel' - Encountered exception during execution: RuntimeError('Инъекция сбоя после подготовки')
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 1339, in run_context
+    yield self
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 2133, in run_flow_sync
+    engine.call_flow_fn()
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 1361, in call_flow_fn
+    result = call_with_parameters(self.flow.fn, self.parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/utilities/callables/__init__.py", line 404, in call_with_parameters
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/flow.py", line 69, in run
+    raise RuntimeError('Инъекция сбоя после подготовки')
+RuntimeError: Инъекция сбоя после подготовки
+22:15:02.732 | INFO    | Flow run 'miraculous-koel' - Finished in state Failed('Flow run encountered an exception: RuntimeError: Инъекция сбоя после подготовки')
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/flow.py", line 83, in <module>
+    print(json.dumps(run(str(args.workspace), args.manifest, args.report, args.fail_after_prepare), ensure_ascii=False))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flows.py", line 1887, in __call__
+    return run_flow(
+           ^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 2290, in run_flow
+    ret_val = run_flow_sync(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 2135, in run_flow_sync
+    return engine.state if return_type == "state" else engine.result()
+                                                       ^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 788, in result
+    raise self._raised
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 1339, in run_context
+    yield self
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 2133, in run_flow_sync
+    engine.call_flow_fn()
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 1361, in call_flow_fn
+    result = call_with_parameters(self.flow.fn, self.parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/utilities/callables/__init__.py", line 404, in call_with_parameters
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/flow.py", line 69, in run
+    raise RuntimeError('Инъекция сбоя после подготовки')
+RuntimeError: Инъекция сбоя после подготовки
+22:15:02.747 | INFO    | prefect - Stopping temporary server on http://127.0.0.1:8693
+
+exit_code=1

@@ -1,0 +1,533 @@
+test_cache_hit_skips_preparation (test_pipeline.PipelineTests.test_cache_hit_skips_preparation) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpjexomk_4/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpjexomk_4/workspace
+
+ok
+test_changed_artifact_cannot_be_published (test_pipeline.PipelineTests.test_changed_artifact_cannot_be_published) ... PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp9i0jp6ro/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp9i0jp6ro/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp9i0jp6ro/workspace run
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 193, in run
+    description = publish_once(root, manifest, report,
+                               fail_after_publish=fail_after_publish)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 155, in publish_once
+    release.verify_artifact(manifest, root)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/release.py", line 109, in verify_artifact
+    raise ValueError(f'Изменён файл: {name}')
+ValueError: Изменён файл: model-B.txt
+
+ok
+test_cli_crash_flag_and_manifest_selection (test_pipeline.PipelineTests.test_cli_crash_flag_and_manifest_selection) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp1nwkohqg/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp1nwkohqg/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp1nwkohqg/workspace run --fail-after-publish
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 193, in run
+    description = publish_once(root, manifest, report,
+                               fail_after_publish=fail_after_publish)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 170, in publish_once
+    raise RuntimeError('Инъекция сбоя после публикации')
+RuntimeError: Инъекция сбоя после публикации
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp1nwkohqg/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp1nwkohqg/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp1nwkohqg/workspace run --manifest manifest-A.json --report report-A.json
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-A
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp1nwkohqg/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+ok
+test_corrupt_cache_is_rebuilt (test_pipeline.PipelineTests.test_corrupt_cache_is_rebuilt) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpg3obkiny/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpg3obkiny/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpg3obkiny/workspace run --fail-after-prepare
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 190, in run
+    raise RuntimeError('Инъекция сбоя после подготовки')
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpg3obkiny/workspace run
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+ok
+test_file_uri_snapshot_symlink_and_missing_file (test_pipeline.PipelineTests.test_file_uri_snapshot_symlink_and_missing_file) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp7vd5oiyi/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp7vd5oiyi/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp7vd5oiyi/workspace run
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp7vd5oiyi/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/release.py", line 104, in verify_artifact
+    with path.open('rb') as handle:
+         ~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py", line 537, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp7vd5oiyi/workspace/snapshot space/weights.bin'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 193, in run
+    description = publish_once(root, manifest, report,
+                               fail_after_publish=fail_after_publish)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 155, in publish_once
+    release.verify_artifact(manifest, root)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/release.py", line 107, in verify_artifact
+    raise ValueError(f'Файл недоступен: {name}') from error
+ValueError: Файл недоступен: weights.bin
+
+ok
+test_jsonl_preparation_rejects_invalid_rows (test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpl126w7rd/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpl126w7rd/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpl126w7rd/workspace run
+PREPARED 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpl126w7rd/workspace run
+CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpl126w7rd/workspace run
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 187, in run
+    prepared = prepare(root)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 114, in prepare
+    'rows': _row_count(payload, config.get('format', 'text'), config.get('schema')),
+            ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 66, in _row_count
+    raise ValueError('Нужны уникальные непустые id')
+ValueError: Нужны уникальные непустые id
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpl126w7rd/workspace run
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 187, in run
+    prepared = prepare(root)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 114, in prepare
+    'rows': _row_count(payload, config.get('format', 'text'), config.get('schema')),
+            ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 69, in _row_count
+    raise ValueError('Пустой input')
+ValueError: Пустой input
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpl126w7rd/workspace run
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 187, in run
+    prepared = prepare(root)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 114, in prepare
+    'rows': _row_count(payload, config.get('format', 'text'), config.get('schema')),
+            ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 73, in _row_count
+    raise ValueError('Неверные choices')
+ValueError: Неверные choices
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpl126w7rd/workspace run
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 187, in run
+    prepared = prepare(root)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 114, in prepare
+    'rows': _row_count(payload, config.get('format', 'text'), config.get('schema')),
+            ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 73, in _row_count
+    raise ValueError('Неверные choices')
+ValueError: Неверные choices
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpl126w7rd/workspace run
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 187, in run
+    prepared = prepare(root)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 114, in prepare
+    'rows': _row_count(payload, config.get('format', 'text'), config.get('schema')),
+            ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 76, in _row_count
+    raise ValueError('Неверный expected')
+ValueError: Неверный expected
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpl126w7rd/workspace run
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 187, in run
+    prepared = prepare(root)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 114, in prepare
+    'rows': _row_count(payload, config.get('format', 'text'), config.get('schema')),
+            ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 66, in _row_count
+    raise ValueError('Нужны уникальные непустые id')
+ValueError: Нужны уникальные непустые id
+
+ok
+test_nan_and_disk_failure_preserve_pointer_hash (test_pipeline.PipelineTests.test_nan_and_disk_failure_preserve_pointer_hash) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpqc120ohg/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpqc120ohg/workspace
+
+NaN SHA-256 до/после: 6d8d7ea405a3d4a1ca3f7392d70eca12b8381614fc3193896b8b16cc8db1177f 6d8d7ea405a3d4a1ca3f7392d70eca12b8381614fc3193896b8b16cc8db1177f
+Ошибка диска SHA-256 до/после: 6d8d7ea405a3d4a1ca3f7392d70eca12b8381614fc3193896b8b16cc8db1177f 6d8d7ea405a3d4a1ca3f7392d70eca12b8381614fc3193896b8b16cc8db1177f
+ok
+test_new_evaluation_and_runtime_have_distinct_publications (test_pipeline.PipelineTests.test_new_evaluation_and_runtime_have_distinct_publications) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmptqe006ru/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmptqe006ru/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmptqe006ru/workspace run
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmptqe006ru/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmptqe006ru/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmptqe006ru/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+ok
+test_prepare_failure_cache_reuse_and_invalidation (test_pipeline.PipelineTests.test_prepare_failure_cache_reuse_and_invalidation) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp79fhka5f/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp79fhka5f/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp79fhka5f/workspace run --fail-after-prepare
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 190, in run
+    raise RuntimeError('Инъекция сбоя после подготовки')
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp79fhka5f/workspace run --fail-after-prepare
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 190, in run
+    raise RuntimeError('Инъекция сбоя после подготовки')
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp79fhka5f/workspace run --fail-after-prepare
+PREPARED 15a392561aefb1166d8b691e36f4c72ba4360e1901a344514bcadcc07e7f15a1
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 190, in run
+    raise RuntimeError('Инъекция сбоя после подготовки')
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp79fhka5f/workspace run --fail-after-prepare
+PREPARED 15a392561aefb1166d8b691e36f4c72ba4360e1901a344514bcadcc07e7f15a1
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 190, in run
+    raise RuntimeError('Инъекция сбоя после подготовки')
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp79fhka5f/workspace run --fail-after-prepare
+PREPARED 15a392561aefb1166d8b691e36f4c72ba4360e1901a344514bcadcc07e7f15a1
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 190, in run
+    raise RuntimeError('Инъекция сбоя после подготовки')
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp79fhka5f/workspace run --fail-after-prepare
+PREPARED 15a392561aefb1166d8b691e36f4c72ba4360e1901a344514bcadcc07e7f15a1
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 190, in run
+    raise RuntimeError('Инъекция сбоя после подготовки')
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp79fhka5f/workspace run --fail-after-prepare
+PREPARED 15a392561aefb1166d8b691e36f4c72ba4360e1901a344514bcadcc07e7f15a1
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 190, in run
+    raise RuntimeError('Инъекция сбоя после подготовки')
+RuntimeError: Инъекция сбоя после подготовки
+
+ok
+test_rejected_incomplete_and_foreign_reports_preserve_pointer (test_pipeline.PipelineTests.test_rejected_incomplete_and_foreign_reports_preserve_pointer) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpni2uvnww/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpni2uvnww/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpni2uvnww/workspace run --report report-reject.json
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 193, in run
+    description = publish_once(root, manifest, report,
+                               fail_after_publish=fail_after_publish)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 154, in publish_once
+    release.validate_release(manifest, report)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/release.py", line 58, in validate_release
+    raise ValueError('Оценка не завершена или кандидат отклонён')
+ValueError: Оценка не завершена или кандидат отклонён
+
+accepted SHA-256: 6d8d7ea405a3d4a1ca3f7392d70eca12b8381614fc3193896b8b16cc8db1177f 6d8d7ea405a3d4a1ca3f7392d70eca12b8381614fc3193896b8b16cc8db1177f
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpni2uvnww/workspace run --report report-incomplete.json
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 193, in run
+    description = publish_once(root, manifest, report,
+                               fail_after_publish=fail_after_publish)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 154, in publish_once
+    release.validate_release(manifest, report)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/release.py", line 58, in validate_release
+    raise ValueError('Оценка не завершена или кандидат отклонён')
+ValueError: Оценка не завершена или кандидат отклонён
+
+accepted SHA-256: 6d8d7ea405a3d4a1ca3f7392d70eca12b8381614fc3193896b8b16cc8db1177f 6d8d7ea405a3d4a1ca3f7392d70eca12b8381614fc3193896b8b16cc8db1177f
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpni2uvnww/workspace run --report report-A.json
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 224, in <module>
+    main()
+    ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 193, in run
+    description = publish_once(root, manifest, report,
+                               fail_after_publish=fail_after_publish)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 154, in publish_once
+    release.validate_release(manifest, report)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/release.py", line 60, in validate_release
+    raise ValueError('Отчёт другого выпуска')
+ValueError: Отчёт другого выпуска
+
+accepted SHA-256: 6d8d7ea405a3d4a1ca3f7392d70eca12b8381614fc3193896b8b16cc8db1177f 6d8d7ea405a3d4a1ca3f7392d70eca12b8381614fc3193896b8b16cc8db1177f
+ok
+test_repeat_recovers_pointer_journal_gap (test_pipeline.PipelineTests.test_repeat_recovers_pointer_journal_gap) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp9vfj8uqq/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp9vfj8uqq/workspace
+
+$-c import sys
+import lab
+original = lab.release.publish
+def fail(*args, **kwargs):
+    original(*args, **kwargs)
+    raise RuntimeError('Сбой между указателем и журналом')
+lab.release.publish = fail
+sys.argv = ['lab.py', '--workspace', sys.argv[1], 'run']
+lab.main()
+ /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp9vfj8uqq/workspace
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "<string>", line 9, in <module>
+    lab.main()
+    ~~~~~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 219, in main
+    run(args.workspace, args.report, args.fail_after_prepare,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.fail_after_publish, args.manifest)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 193, in run
+    description = publish_once(root, manifest, report,
+                               fail_after_publish=fail_after_publish)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 168, in publish_once
+    release.publish(manifest, report, target)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 6, in fail
+    raise RuntimeError('Сбой между указателем и журналом')
+RuntimeError: Сбой между указателем и журналом
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp9vfj8uqq/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp9vfj8uqq/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+ok
+test_verify_artifact_rejects_bad_inventory (test_pipeline.PipelineTests.test_verify_artifact_rejects_bad_inventory) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpstmjlcjf/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpstmjlcjf/workspace
+
+ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 1.971s
+
+OK
+test_changed_bytes_at_same_path_invalidate_cache (test_release.ReleaseContractTests.test_changed_bytes_at_same_path_invalidate_cache) ... ok
+test_complete_bound_report_allowed (test_release.ReleaseContractTests.test_complete_bound_report_allowed) ... ok
+test_every_preparation_setting_invalidates_cache (test_release.ReleaseContractTests.test_every_preparation_setting_invalidates_cache) ... ok
+test_failed_atomic_replace_preserves_previous_bytes (test_release.ReleaseContractTests.test_failed_atomic_replace_preserves_previous_bytes) ... ok
+test_incomplete_false_and_truthy_string_rejected (test_release.ReleaseContractTests.test_incomplete_false_and_truthy_string_rejected) ... ok
+test_invalid_digest_and_schema_rejected (test_release.ReleaseContractTests.test_invalid_digest_and_schema_rejected) ... ok
+test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) ... ok
+test_key_ignores_path_and_mapping_order (test_release.ReleaseContractTests.test_key_ignores_path_and_mapping_order) ... ok
+test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) ... ok
+test_publish_and_repeat (test_release.ReleaseContractTests.test_publish_and_repeat) ... ok
+test_rejection_preserves_previous_bytes (test_release.ReleaseContractTests.test_rejection_preserves_previous_bytes) ... ok
+test_report_binding_mismatch_rejected (test_release.ReleaseContractTests.test_report_binding_mismatch_rejected) ... ok
+test_runtime_change_with_stale_hash_rejected (test_release.ReleaseContractTests.test_runtime_change_with_stale_hash_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.008s
+
+OK

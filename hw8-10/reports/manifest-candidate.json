@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "model_id": "d9a54c5e83d4496d9fafdadcfcf7d30d",
+  "kind": "adapter",
+  "artifact_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw8-10/context/real/artifacts/candidate",
+  "file_hashes": {
+    "README.md": "e45e743402a652e377f3409fe759bdf1024b1fc27beaf5747901d150158feee4",
+    "adapter_config.json": "e952e49f45e54be5492e32cb6ec5b72101c774577f0a1ea750724a6acdc3cf12",
+    "adapter_model.safetensors": "ea2824357845488cb28b12d69e9a3c6ddcbe37d365f461e746b558a2a767bda2",
+    "chat_template.jinja": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+    "manifest.json": "861b26bb41cafd1e29e175f83879268492eedc05d177f68a61149e753e06840c",
+    "tokenizer.json": "be75606093db2094d7cd20f3c2f385c212750648bd6ea4fb2bf507a6a4c55506",
+    "tokenizer_config.json": "c4f4c62b741ab2940841480f9942f378d7d3878d47c2babb862af7381c59b952"
+  },
+  "model_sha256": "7ec0de854b915ded1590557e40e2b5e3becb14cef10a3f38dcde0d369ee9ff16",
+  "runtime": {
+    "base_name": "Qwen/Qwen3-1.7B",
+    "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "base_path": "/Users/georjo/.cache/huggingface/hub/models--Qwen--Qwen3-1.7B/snapshots/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "tokenizer_path": "/Users/georjo/uni/сем7/mlops/hw8-10/context/real/artifacts/candidate",
+    "tokenizer_sha256": "8a100a872006b610791805aac1fd25eec7d898ffaa84668f4503e184031b91f4",
+    "template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+    "dtype": "bfloat16",
+    "device": "mps",
+    "generation": {
+      "system": "Select the title that best matches the scientific abstract from the options provided. Return only a JSON object with exactly one field \"answer\", whose value is a string label from choices. Do not generate a new title or explain your choice. If the request is not a scientific abstract with title options, return {\"answer\":\"REFUSE\"}.",
+      "max_new_tokens": 32,
+      "enable_thinking": false,
+      "do_sample": false,
+      "seed": 42,
+      "tokenize": false,
+      "add_generation_prompt": true,
+      "skip_special_tokens": true,
+      "pad_token_id_policy": "pad_or_eos"
+    }
+  },
+  "runtime_sha256": "e2957efcd3cc4890f2d7264999bedcef4a3037f079ca81b8a1b641229bef067c",
+  "protocol_sha256": "2ef1ed17c190dfd045ede4bf1689b33aeaed782a7ab0b58274b2f0f56c22f2db",
+  "golden_sha256": "179b4739c6802b10762b7dc5d0510dc6c210528e303a7d7d46fb9872b5c08748",
+  "base_file_hashes": {
+    ".gitattributes": "34448b82c17d60fec9b65b1f093c115ddbaadc04beb1b0140b6bfed2e012a930",
+    "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+    "README.md": "257e52c419dac2258852643f18af6c974f21f8c6c1b6f371b6cca6201cf29091",
+    "config.json": "1ddb5b89ebc90dcb417a45c213d818577e65976454d29385c8f6140771d95197",
+    "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+    "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "model-00001-of-00002.safetensors": "169ad53ec313c3a34b06c0809216e4fc072cce444a5d4ff2b59690d064130ed5",
+    "model-00002-of-00002.safetensors": "912becff8d60672aa8628ef08c05898d9adf17c2ad4ae3caf99b065622fdeff9",
+    "model.safetensors.index.json": "0d660e94b165eb912669a5249dff44b83188c4777a07ddb9611fb78d91b0578d",
+    "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+    "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "provenance": {
+    "source": "hw6-7",
+    "source_root": "/Users/georjo/uni/сем7/mlops/hw6-7",
+    "git_sha": "bc5959dfd66664469a7e792b517328cd64a76ab2",
+    "baseline_spec_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/evaluation/baseline.json",
+    "baseline_spec_sha256": "d7f7f4b1503423252f8073e8e1e660b9d2ff0baab7f4e29ef2b4cfb9db42dc56",
+    "evaluation_reused": true,
+    "runtime_evidence": "evaluation/cli.py + adapter manifest; device=mps по исходному запуску",
+    "training_run_id": "d9a54c5e83d4496d9fafdadcfcf7d30d",
+    "registry_uri": "models:/arxiv-title-qwen3-1-7b/1",
+    "mlmodel_uri": "file:///private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp19ctp931/MLmodel",
+    "mlmodel_sha256": "9a758bb680b968e563fedbc6a3ccfe0298b861c1a8d13ff195fabddca21f68b2",
+    "matching_local_copies": 10,
+    "training_repeated": false
+  }
+}

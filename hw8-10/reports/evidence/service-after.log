@@ -1,0 +1,13 @@
+test_factory_warmup_and_baseline_without_accepted_manifest (test_service.ServiceBackendTests.test_factory_warmup_and_baseline_without_accepted_manifest) ... ok
+test_runtime_hash_mismatch_does_not_construct_backend (test_service.ServiceBackendTests.test_runtime_hash_mismatch_does_not_construct_backend) ... ok
+test_tokenizer_template_and_revision_checked_before_loading (test_service.ServiceBackendTests.test_tokenizer_template_and_revision_checked_before_loading) ... ok
+test_two_requests_serialize_and_third_is_rejected (test_service.ServiceBackendTests.test_two_requests_serialize_and_third_is_rejected) ... ok
+test_corrupt_weights_never_become_ready (test_service.ServiceHTTPTests.test_corrupt_weights_never_become_ready) ... ok
+test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) ... ok
+test_loaded_version_a_b_a_changes_only_after_restart (test_service.ServiceHTTPTests.test_loaded_version_a_b_a_changes_only_after_restart) ... ok
+test_readiness_blocks_generation_until_warmup (test_service.ServiceHTTPTests.test_readiness_blocks_generation_until_warmup) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 4.411s
+
+OK

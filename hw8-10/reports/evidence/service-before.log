@@ -1,0 +1,148 @@
+test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) ...
+  test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': ''}") ... FAIL
+  test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': '  '}") ... FAIL
+  test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 'x', 'max_new_tokens': 0}") ... FAIL
+  test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 'x', 'max_new_tokens': 100000}") ... FAIL
+  test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 'x', 'max_new_tokens': '32'}") ... FAIL
+  test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 'x', 'max_new_tokens': True}") ... FAIL
+  test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 'x', 'max_new_tokens': 1.5}") ... FAIL
+  test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 123}") ... FAIL
+  test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx") ... FAIL
+  test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload='{}') ... FAIL
+  test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload='[]') ... FAIL
+  test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload='None') ... FAIL
+test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) ... FAIL
+test_loaded_version_a_b_a_changes_only_after_restart (test_service.ServiceHTTPTests.test_loaded_version_a_b_a_changes_only_after_restart) ... FAIL
+test_readiness_blocks_generation_until_warmup (test_service.ServiceHTTPTests.test_readiness_blocks_generation_until_warmup) ... FAIL
+
+======================================================================
+FAIL: test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': ''}")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 153, in test_invalid_requests_do_not_call_backend
+    self.assertTrue(400 <= status < 500, status)
+AssertionError: False is not true : 200
+
+======================================================================
+FAIL: test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': '  '}")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 153, in test_invalid_requests_do_not_call_backend
+    self.assertTrue(400 <= status < 500, status)
+AssertionError: False is not true : 200
+
+======================================================================
+FAIL: test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 'x', 'max_new_tokens': 0}")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 153, in test_invalid_requests_do_not_call_backend
+    self.assertTrue(400 <= status < 500, status)
+AssertionError: False is not true : 200
+
+======================================================================
+FAIL: test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 'x', 'max_new_tokens': 100000}")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 153, in test_invalid_requests_do_not_call_backend
+    self.assertTrue(400 <= status < 500, status)
+AssertionError: False is not true : 200
+
+======================================================================
+FAIL: test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 'x', 'max_new_tokens': '32'}")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 153, in test_invalid_requests_do_not_call_backend
+    self.assertTrue(400 <= status < 500, status)
+AssertionError: False is not true : 200
+
+======================================================================
+FAIL: test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 'x', 'max_new_tokens': True}")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 153, in test_invalid_requests_do_not_call_backend
+    self.assertTrue(400 <= status < 500, status)
+AssertionError: False is not true : 200
+
+======================================================================
+FAIL: test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 'x', 'max_new_tokens': 1.5}")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 153, in test_invalid_requests_do_not_call_backend
+    self.assertTrue(400 <= status < 500, status)
+AssertionError: False is not true : 200
+
+======================================================================
+FAIL: test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 123}")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 153, in test_invalid_requests_do_not_call_backend
+    self.assertTrue(400 <= status < 500, status)
+AssertionError: False is not true : 200
+
+======================================================================
+FAIL: test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload="{'prompt': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 153, in test_invalid_requests_do_not_call_backend
+    self.assertTrue(400 <= status < 500, status)
+AssertionError: False is not true : 200
+
+======================================================================
+FAIL: test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload='{}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 153, in test_invalid_requests_do_not_call_backend
+    self.assertTrue(400 <= status < 500, status)
+AssertionError: False is not true : 200
+
+======================================================================
+FAIL: test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload='[]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 154, in test_invalid_requests_do_not_call_backend
+    self.assertEqual(self.request('/debug')[1]['calls'], before)
+AssertionError: 10 != 0
+
+======================================================================
+FAIL: test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend) (payload='None')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 154, in test_invalid_requests_do_not_call_backend
+    self.assertEqual(self.request('/debug')[1]['calls'], before)
+AssertionError: 10 != 0
+
+======================================================================
+FAIL: test_invalid_requests_do_not_call_backend (test_service.ServiceHTTPTests.test_invalid_requests_do_not_call_backend)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 156, in test_invalid_requests_do_not_call_backend
+    self.assertEqual(self.request('/debug')[1]['calls'], before)
+AssertionError: 10 != 0
+
+======================================================================
+FAIL: test_loaded_version_a_b_a_changes_only_after_restart (test_service.ServiceHTTPTests.test_loaded_version_a_b_a_changes_only_after_restart)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 130, in test_loaded_version_a_b_a_changes_only_after_restart
+    self.assert_version('A')
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 107, in assert_version
+    self.assertEqual(result['model_id'], f'fixture-{version}')
+AssertionError: 'fixture-B' != 'fixture-A'
+- fixture-B
+?         ^
++ fixture-A
+?         ^
+
+
+======================================================================
+FAIL: test_readiness_blocks_generation_until_warmup (test_service.ServiceHTTPTests.test_readiness_blocks_generation_until_warmup)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_service.py", line 116, in test_readiness_blocks_generation_until_warmup
+    self.assertEqual(self.request('/ready')[0], 503)
+AssertionError: 200 != 503
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.911s
+
+FAILED (failures=15)
