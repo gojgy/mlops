@@ -1,0 +1,519 @@
+test_changed_bytes_at_same_path_invalidate_cache (test_release.ReleaseContractTests.test_changed_bytes_at_same_path_invalidate_cache) ... ok
+test_complete_bound_report_allowed (test_release.ReleaseContractTests.test_complete_bound_report_allowed) ... ok
+test_every_preparation_setting_invalidates_cache (test_release.ReleaseContractTests.test_every_preparation_setting_invalidates_cache) ... ok
+test_failed_atomic_replace_preserves_previous_bytes (test_release.ReleaseContractTests.test_failed_atomic_replace_preserves_previous_bytes) ... ok
+test_incomplete_false_and_truthy_string_rejected (test_release.ReleaseContractTests.test_incomplete_false_and_truthy_string_rejected) ...
+  test_incomplete_false_and_truthy_string_rejected (test_release.ReleaseContractTests.test_incomplete_false_and_truthy_string_rejected) (key='status', value='failed') ... FAIL
+  test_incomplete_false_and_truthy_string_rejected (test_release.ReleaseContractTests.test_incomplete_false_and_truthy_string_rejected) (key='status', value='running') ... FAIL
+  test_incomplete_false_and_truthy_string_rejected (test_release.ReleaseContractTests.test_incomplete_false_and_truthy_string_rejected) (key='passed', value=False) ... FAIL
+  test_incomplete_false_and_truthy_string_rejected (test_release.ReleaseContractTests.test_incomplete_false_and_truthy_string_rejected) (key='passed', value='true') ... FAIL
+  test_incomplete_false_and_truthy_string_rejected (test_release.ReleaseContractTests.test_incomplete_false_and_truthy_string_rejected) (key='evaluation_run_id', value='') ... FAIL
+test_invalid_digest_and_schema_rejected (test_release.ReleaseContractTests.test_invalid_digest_and_schema_rejected) ...
+  test_invalid_digest_and_schema_rejected (test_release.ReleaseContractTests.test_invalid_digest_and_schema_rejected) (key='schema_version') ... FAIL
+  test_invalid_digest_and_schema_rejected (test_release.ReleaseContractTests.test_invalid_digest_and_schema_rejected) (key='schema_version') ... FAIL
+  test_invalid_digest_and_schema_rejected (test_release.ReleaseContractTests.test_invalid_digest_and_schema_rejected) (key='model_sha256') ... FAIL
+  test_invalid_digest_and_schema_rejected (test_release.ReleaseContractTests.test_invalid_digest_and_schema_rejected) (key='model_id') ... FAIL
+  test_invalid_digest_and_schema_rejected (test_release.ReleaseContractTests.test_invalid_digest_and_schema_rejected) (key='artifact_uri') ... FAIL
+test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) ...
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=nan, metric='accuracy') ... FAIL
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=nan, metric='format_rate') ... FAIL
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=inf, metric='accuracy') ... FAIL
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=inf, metric='format_rate') ... FAIL
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=-0.1, metric='accuracy') ... FAIL
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=-0.1, metric='format_rate') ... FAIL
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=1.1, metric='accuracy') ... FAIL
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=1.1, metric='format_rate') ... FAIL
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=True, metric='accuracy') ... FAIL
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=True, metric='format_rate') ... FAIL
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value='0.8', metric='accuracy') ... FAIL
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value='0.8', metric='format_rate') ... FAIL
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=None, metric='accuracy') ... FAIL
+  test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=None, metric='format_rate') ... FAIL
+test_key_ignores_path_and_mapping_order (test_release.ReleaseContractTests.test_key_ignores_path_and_mapping_order) ... ok
+test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) ...
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='schema_version') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='model_id') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='model_sha256') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='protocol_sha256') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='golden_sha256') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='runtime_sha256') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='runtime') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='artifact_uri') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='status') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='passed') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='evaluation_run_id') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='model_id') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='model_sha256') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='protocol_sha256') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='golden_sha256') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='runtime_sha256') ... FAIL
+  test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='metrics') ... FAIL
+test_publish_and_repeat (test_release.ReleaseContractTests.test_publish_and_repeat) ... ok
+test_rejection_preserves_previous_bytes (test_release.ReleaseContractTests.test_rejection_preserves_previous_bytes) ... FAIL
+test_report_binding_mismatch_rejected (test_release.ReleaseContractTests.test_report_binding_mismatch_rejected) ...
+  test_report_binding_mismatch_rejected (test_release.ReleaseContractTests.test_report_binding_mismatch_rejected) (key='model_id') ... FAIL
+  test_report_binding_mismatch_rejected (test_release.ReleaseContractTests.test_report_binding_mismatch_rejected) (key='model_sha256') ... FAIL
+  test_report_binding_mismatch_rejected (test_release.ReleaseContractTests.test_report_binding_mismatch_rejected) (key='protocol_sha256') ... FAIL
+  test_report_binding_mismatch_rejected (test_release.ReleaseContractTests.test_report_binding_mismatch_rejected) (key='golden_sha256') ... FAIL
+  test_report_binding_mismatch_rejected (test_release.ReleaseContractTests.test_report_binding_mismatch_rejected) (key='runtime_sha256') ... FAIL
+test_runtime_change_with_stale_hash_rejected (test_release.ReleaseContractTests.test_runtime_change_with_stale_hash_rejected) ...
+  test_runtime_change_with_stale_hash_rejected (test_release.ReleaseContractTests.test_runtime_change_with_stale_hash_rejected) (key='dtype') ... FAIL
+  test_runtime_change_with_stale_hash_rejected (test_release.ReleaseContractTests.test_runtime_change_with_stale_hash_rejected) (key='template_sha256') ... FAIL
+  test_runtime_change_with_stale_hash_rejected (test_release.ReleaseContractTests.test_runtime_change_with_stale_hash_rejected) (key='generation') ... FAIL
+
+======================================================================
+FAIL: test_incomplete_false_and_truthy_string_rejected (test_release.ReleaseContractTests.test_incomplete_false_and_truthy_string_rejected) (key='status', value='failed')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 57, in test_incomplete_false_and_truthy_string_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,bad)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_incomplete_false_and_truthy_string_rejected (test_release.ReleaseContractTests.test_incomplete_false_and_truthy_string_rejected) (key='status', value='running')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 57, in test_incomplete_false_and_truthy_string_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,bad)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_incomplete_false_and_truthy_string_rejected (test_release.ReleaseContractTests.test_incomplete_false_and_truthy_string_rejected) (key='passed', value=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 57, in test_incomplete_false_and_truthy_string_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,bad)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_incomplete_false_and_truthy_string_rejected (test_release.ReleaseContractTests.test_incomplete_false_and_truthy_string_rejected) (key='passed', value='true')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 57, in test_incomplete_false_and_truthy_string_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,bad)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_incomplete_false_and_truthy_string_rejected (test_release.ReleaseContractTests.test_incomplete_false_and_truthy_string_rejected) (key='evaluation_run_id', value='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 57, in test_incomplete_false_and_truthy_string_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,bad)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_digest_and_schema_rejected (test_release.ReleaseContractTests.test_invalid_digest_and_schema_rejected) (key='schema_version')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 90, in test_invalid_digest_and_schema_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,self.report)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_digest_and_schema_rejected (test_release.ReleaseContractTests.test_invalid_digest_and_schema_rejected) (key='schema_version')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 90, in test_invalid_digest_and_schema_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,self.report)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_digest_and_schema_rejected (test_release.ReleaseContractTests.test_invalid_digest_and_schema_rejected) (key='model_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 90, in test_invalid_digest_and_schema_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,self.report)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_digest_and_schema_rejected (test_release.ReleaseContractTests.test_invalid_digest_and_schema_rejected) (key='model_id')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 90, in test_invalid_digest_and_schema_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,self.report)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_digest_and_schema_rejected (test_release.ReleaseContractTests.test_invalid_digest_and_schema_rejected) (key='artifact_uri')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 90, in test_invalid_digest_and_schema_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,self.report)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=nan, metric='accuracy')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=nan, metric='format_rate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=inf, metric='accuracy')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=inf, metric='format_rate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=-0.1, metric='accuracy')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=-0.1, metric='format_rate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=1.1, metric='accuracy')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=1.1, metric='format_rate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=True, metric='accuracy')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=True, metric='format_rate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value='0.8', metric='accuracy')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value='0.8', metric='format_rate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=None, metric='accuracy')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_metric_rejected (test_release.ReleaseContractTests.test_invalid_metric_rejected) (value=None, metric='format_rate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 84, in test_invalid_metric_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='schema_version')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='model_id')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='model_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='protocol_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='golden_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='runtime_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='runtime')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='manifest', key='artifact_uri')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='status')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='passed')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='evaluation_run_id')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='model_id')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='model_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='protocol_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='golden_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='runtime_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_fields_rejected (test_release.ReleaseContractTests.test_missing_fields_rejected) (side='report', key='metrics')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 65, in test_missing_fields_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejection_preserves_previous_bytes (test_release.ReleaseContractTests.test_rejection_preserves_previous_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 100, in test_rejection_preserves_previous_bytes
+    with self.assertRaises(ValueError):release.publish(self.manifest,bad,self.target)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_report_binding_mismatch_rejected (test_release.ReleaseContractTests.test_report_binding_mismatch_rejected) (key='model_id')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 71, in test_report_binding_mismatch_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,bad)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_report_binding_mismatch_rejected (test_release.ReleaseContractTests.test_report_binding_mismatch_rejected) (key='model_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 71, in test_report_binding_mismatch_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,bad)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_report_binding_mismatch_rejected (test_release.ReleaseContractTests.test_report_binding_mismatch_rejected) (key='protocol_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 71, in test_report_binding_mismatch_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,bad)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_report_binding_mismatch_rejected (test_release.ReleaseContractTests.test_report_binding_mismatch_rejected) (key='golden_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 71, in test_report_binding_mismatch_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,bad)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_report_binding_mismatch_rejected (test_release.ReleaseContractTests.test_report_binding_mismatch_rejected) (key='runtime_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 71, in test_report_binding_mismatch_rejected
+    with self.assertRaises(ValueError):release.validate_release(self.manifest,bad)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_runtime_change_with_stale_hash_rejected (test_release.ReleaseContractTests.test_runtime_change_with_stale_hash_rejected) (key='dtype')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 77, in test_runtime_change_with_stale_hash_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,self.report)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_runtime_change_with_stale_hash_rejected (test_release.ReleaseContractTests.test_runtime_change_with_stale_hash_rejected) (key='template_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 77, in test_runtime_change_with_stale_hash_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,self.report)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_runtime_change_with_stale_hash_rejected (test_release.ReleaseContractTests.test_runtime_change_with_stale_hash_rejected) (key='generation')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpcfq6pa6x/tests/test_release.py", line 77, in test_runtime_change_with_stale_hash_rejected
+    with self.assertRaises(ValueError):release.validate_release(m,self.report)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.009s
+
+FAILED (failures=50)
+
+exit_code=1

@@ -1,0 +1,14 @@
+{
+  "golden": "data/eval/golden.jsonl",
+  "training_index": "data/eval/training-index.jsonl",
+  "behavioral": "data/eval/behavioral.jsonl",
+  "critical_slices": [
+    "computer_science",
+    "mathematics",
+    "statistics"
+  ],
+  "seed": 42,
+  "system": "Select the title that best matches the scientific abstract from the options provided. Return only a JSON object with exactly one field \"answer\", whose value is a string label from choices. Do not generate a new title or explain your choice. If the request is not a scientific abstract with title options, return {\"answer\":\"REFUSE\"}.",
+  "max_new_tokens": 32,
+  "enable_thinking": false
+}

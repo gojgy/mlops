@@ -1,0 +1,670 @@
+{
+  "overall": {
+    "n": 50,
+    "correct": 48,
+    "valid": 50,
+    "errors": 0,
+    "accuracy": 0.96,
+    "format_rate": 1.0
+  },
+  "per_item": [
+    {
+      "id": "arxiv:0804.0398",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:1003.0360",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:1006.1450",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:1207.0874",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:1104.5341",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:1210.0706",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:1203.6157",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:1006.1433",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:0810.4902",
+      "raw": "{\"answer\":\"REFUSE\"}",
+      "parsed": "REFUSE",
+      "valid": true,
+      "correct": false,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:1210.1190",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:1108.2228",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:0806.1139",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:1107.1547",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:1109.3782",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:1110.0405",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:1003.3629",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:1206.3260",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:1108.0453",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:1007.3829",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:0708.2377",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:0712.2184",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:1204.5981",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:0808.2670",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:1202.6504",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:1002.2450",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:0904.2144",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:1210.1928",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:0812.1615",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:0907.5494",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:1202.3774",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:0907.3086",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:1204.2058",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:1004.3371",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:0710.5874",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:0803.3746",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:1211.2396",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:1110.2345",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:0809.2365",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": false,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:0908.0128",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:0805.3204",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:1202.2393",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:1109.3322",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:1104.5687",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:1212.2393",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:1210.2972",
+      "raw": "{\"answer\":\"C\"}",
+      "parsed": "C",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:1004.5031",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arxiv:0905.1608",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:1103.1130",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "arxiv:1006.4754",
+      "raw": "{\"answer\":\"A\"}",
+      "parsed": "A",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "computer_science"
+      ]
+    },
+    {
+      "id": "arxiv:1205.6102",
+      "raw": "{\"answer\":\"B\"}",
+      "parsed": "B",
+      "valid": true,
+      "correct": true,
+      "error": null,
+      "slices": [
+        "mathematics"
+      ]
+    }
+  ],
+  "slices": {
+    "computer_science": {
+      "n": 18,
+      "correct": 18,
+      "valid": 18,
+      "errors": 0,
+      "accuracy": 1.0,
+      "format_rate": 1.0
+    },
+    "mathematics": {
+      "n": 16,
+      "correct": 14,
+      "valid": 16,
+      "errors": 0,
+      "accuracy": 0.875,
+      "format_rate": 1.0
+    },
+    "statistics": {
+      "n": 16,
+      "correct": 16,
+      "valid": 16,
+      "errors": 0,
+      "accuracy": 1.0,
+      "format_rate": 1.0
+    }
+  },
+  "status": "complete",
+  "model": {
+    "kind": "adapter",
+    "name": "arxiv-title-qwen3-1-7b",
+    "version": "1",
+    "run_id": "d9a54c5e83d4496d9fafdadcfcf7d30d",
+    "uri": "models:/arxiv-title-qwen3-1-7b/1"
+  },
+  "protocol_sha256": "2ef1ed17c190dfd045ede4bf1689b33aeaed782a7ab0b58274b2f0f56c22f2db",
+  "golden_sha256": "179b4739c6802b10762b7dc5d0510dc6c210528e303a7d7d46fb9872b5c08748",
+  "baseline_spec_sha256": "e302a4c66fa7dc3571f7c91507bd5cfcb34b5f9b79277775f8a0599ca053ec95",
+  "behavioral": {
+    "overall": {
+      "n": 3,
+      "correct": 2,
+      "valid": 3,
+      "errors": 0,
+      "accuracy": 0.6666666666666666,
+      "format_rate": 1.0
+    },
+    "per_item": [
+      {
+        "id": "behavior-format",
+        "raw": "{\"answer\":\"C\"}",
+        "parsed": "C",
+        "valid": true,
+        "correct": true,
+        "error": null,
+        "slices": [
+          "mathematics"
+        ]
+      },
+      {
+        "id": "behavior-paraphrase",
+        "raw": "{\"answer\":\"C\"}",
+        "parsed": "C",
+        "valid": true,
+        "correct": true,
+        "error": null,
+        "slices": [
+          "mathematics"
+        ]
+      },
+      {
+        "id": "behavior-refusal",
+        "raw": "{\n  \"answer\": \"B\"\n}",
+        "parsed": "B",
+        "valid": true,
+        "correct": false,
+        "error": null,
+        "slices": [
+          "out_of_scope"
+        ]
+      }
+    ],
+    "slices": {
+      "mathematics": {
+        "n": 2,
+        "correct": 2,
+        "valid": 2,
+        "errors": 0,
+        "accuracy": 1.0,
+        "format_rate": 1.0
+      },
+      "out_of_scope": {
+        "n": 1,
+        "correct": 0,
+        "valid": 1,
+        "errors": 0,
+        "accuracy": 0.0,
+        "format_rate": 1.0
+      }
+    }
+  },
+  "leakage": {
+    "exact_or_group_intersections": 0,
+    "n_train_index": 45772,
+    "n_golden": 50,
+    "n_behavioral": 3
+  },
+  "outputs_sha256": "8a1e366eef47ec3d6603b2af3f1309cfa7c2f68c985f60518b3e011e16285465",
+  "evaluation_run_id": "4f8e7e76210a4cbcbb3a8d63a5dce9d8"
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "path": "/health",
+    "status": 200,
+    "body": {
+      "alive": true
+    }
+  },
+  {
+    "path": "/ready",
+    "status": 503,
+    "body": {
+      "ready": false
+    }
+  }
+]

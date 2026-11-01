@@ -1,0 +1,13 @@
+{
+  "status": 200,
+  "result": {
+    "answer": "{\"answer\":\"C\"}",
+    "output_tokens": 6,
+    "model_id": "Qwen3-1.7B-70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "runtime_sha256": "c343b9882d36fc7477fb828d72151213e83326d0f890da0b405f259150c20030",
+    "request_id": "155ce49a-3052-4fdc-aff0-de22f699de6d",
+    "queue_seconds": 0.0022072079591453075,
+    "generation_seconds": 0.7504348340444267,
+    "server_seconds": 0.752642042003572
+  }
+}

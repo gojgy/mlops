@@ -1,0 +1,4 @@
+$ lab.py --workspace /Users/georjo/uni/сем7/mlops/hw8-10/context/flow-check init
+Создан синтетический стенд: /Users/georjo/uni/сем7/mlops/hw8-10/context/flow-check
+
+exit_code=0

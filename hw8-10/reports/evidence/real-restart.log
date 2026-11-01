@@ -1,0 +1,9 @@
+INFO:     Started server process [78155]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8091 (Press CTRL+C to quit)
+
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 311/311 [00:00<00:00, 15727.75it/s]
+INFO:     127.0.0.1:56084 - "GET /ready HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56085 - "POST /generate HTTP/1.1" 200 OK

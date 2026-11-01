@@ -1,0 +1,33 @@
+{
+  "accepted": false,
+  "model": {
+    "kind": "adapter",
+    "name": "arxiv-title-qwen3-1-7b",
+    "version": "1",
+    "run_id": "d9a54c5e83d4496d9fafdadcfcf7d30d",
+    "uri": "models:/arxiv-title-qwen3-1-7b/1"
+  },
+  "evaluation_run_id": "4f8e7e76210a4cbcbb3a8d63a5dce9d8",
+  "aliases": {
+    "candidate": "1"
+  },
+  "violations": [
+    {
+      "metric": "accuracy",
+      "baseline": 0.98,
+      "candidate": 0.96
+    },
+    {
+      "slice": "mathematics",
+      "baseline": 0.9375,
+      "candidate": 0.875
+    },
+    {
+      "behavioral_failed": [
+        "behavior-refusal"
+      ]
+    }
+  ],
+  "repeated_generation_matches": true,
+  "negative_counts_verified": true
+}

@@ -1,0 +1,128 @@
+{
+  "model_id": "d9a54c5e83d4496d9fafdadcfcf7d30d",
+  "model_sha256": "7ec0de854b915ded1590557e40e2b5e3becb14cef10a3f38dcde0d369ee9ff16",
+  "runtime_sha256": "e2957efcd3cc4890f2d7264999bedcef4a3037f079ca81b8a1b641229bef067c",
+  "protocol_sha256": "2ef1ed17c190dfd045ede4bf1689b33aeaed782a7ab0b58274b2f0f56c22f2db",
+  "golden_sha256": "179b4739c6802b10762b7dc5d0510dc6c210528e303a7d7d46fb9872b5c08748",
+  "status": "complete",
+  "passed": false,
+  "evaluation_run_id": "4f8e7e76210a4cbcbb3a8d63a5dce9d8",
+  "metrics": {
+    "accuracy": 0.96,
+    "format_rate": 1.0
+  },
+  "quality_gate": {
+    "passed": false,
+    "reason": "Ухудшение общей метрики accuracy"
+  },
+  "sources": {
+    "context/submission/manifest.json": {
+      "path": "sources/context/submission/manifest.json",
+      "sha256": "ea494d6a9263862be614fc442702b8dc439b4c2503ccf270ee275fe16dac15cd",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/context/submission/manifest.json"
+    },
+    "evaluation/params.json": {
+      "path": "sources/evaluation/params.json",
+      "sha256": "94fbddb81976c3c0a9d33cd0790d699b615924ee6d0f31fede01a54f001bb7a4",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/evaluation/params.json"
+    },
+    "evaluation/baseline.json": {
+      "path": "sources/evaluation/baseline.json",
+      "sha256": "d7f7f4b1503423252f8073e8e1e660b9d2ff0baab7f4e29ef2b4cfb9db42dc56",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/evaluation/baseline.json"
+    },
+    "metrics/candidate-model.json": {
+      "path": "sources/metrics/candidate-model.json",
+      "sha256": "a152541b731bdc2e822de54fdf9e64bcf9de4eac381c927c471dbb65c9fbea6b",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/metrics/candidate-model.json"
+    },
+    "metrics/sweep.json": {
+      "path": "sources/metrics/sweep.json",
+      "sha256": "004e686fc3295e021fad549a3b4980ef27f5753c3789e9a5aa23790784cd67e3",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/metrics/sweep.json"
+    },
+    "metrics/release-decision.json": {
+      "path": "sources/metrics/release-decision.json",
+      "sha256": "05267cb0779538502a040be54a42bbec97887783ce16f1fc59e102d9f6a49e0c",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/metrics/release-decision.json"
+    },
+    "metrics/quality-gate.json": {
+      "path": "sources/metrics/quality-gate.json",
+      "sha256": "d368a092e99b27f2f95c36fcad61ccf9dc57203d06c0deec4c2401568f403e64",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/metrics/quality-gate.json"
+    },
+    "metrics/baseline-eval.json": {
+      "path": "sources/metrics/baseline-eval.json",
+      "sha256": "32d1030e4a1376334d66e9cb9d70f00acbedee59ec6a4ebbb0b846151cb7858d",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/metrics/baseline-eval.json"
+    },
+    "metrics/baseline-outputs.json": {
+      "path": "sources/metrics/baseline-outputs.json",
+      "sha256": "c6b626689c276ca7d3fde529dbc319ebde463f234f1c67c744f75a133f812591",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/metrics/baseline-outputs.json"
+    },
+    "metrics/candidate-eval.json": {
+      "path": "sources/metrics/candidate-eval.json",
+      "sha256": "65cb5ce1a123f519703b00e62ccb6971a813250df3544595bd38e16f1d92d1f0",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/metrics/candidate-eval.json"
+    },
+    "metrics/candidate-outputs.json": {
+      "path": "sources/metrics/candidate-outputs.json",
+      "sha256": "d4751affa951d3ddcfaec530caac5b0b1b615534ff2b4d3c2a999cfc30e88d09",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/metrics/candidate-outputs.json"
+    },
+    "evaluation/__init__.py": {
+      "path": "sources/evaluation/__init__.py",
+      "sha256": "7e1eb882d1b9c88756e0500bb9413355aa5115fa7a0b75843def0ca9bd749e4b",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/evaluation/__init__.py"
+    },
+    "evaluation/cli.py": {
+      "path": "sources/evaluation/cli.py",
+      "sha256": "c6199af5d0e47ba7c463c649f7440c3dbfee250a4e8602b95d62331e35195a2d",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/evaluation/cli.py"
+    },
+    "evaluation/contract.py": {
+      "path": "sources/evaluation/contract.py",
+      "sha256": "4a9f63ca6904ce1913b56a1a158df8a5f800fdcb569a9522c95b7f1482ee53c8",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/evaluation/contract.py"
+    },
+    "evaluation/solution.py": {
+      "path": "sources/evaluation/solution.py",
+      "sha256": "291aad0e317b7880b50382a632f10d5d59fcecdfd8cfab1ef452fbded57963e6",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/evaluation/solution.py"
+    },
+    "data/eval/golden.jsonl": {
+      "path": "sources/data/eval/golden.jsonl",
+      "sha256": "b2ba1d8e5d2249c4f3cbd7163cfb6f6c650d09be04a5b853b25e42d90757d340",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/data/eval/golden.jsonl"
+    },
+    "data/eval/behavioral.jsonl": {
+      "path": "sources/data/eval/behavioral.jsonl",
+      "sha256": "38e3e32bc5e54f6f033729d38125a95875ccf91cdf17f9c28b309e0913e45071",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/data/eval/behavioral.jsonl"
+    },
+    "data/eval/training-index.jsonl": {
+      "path": "sources/data/eval/training-index.jsonl",
+      "sha256": "9caeedca4299066317d4e85c2dfea0204a4080a89f95e4cbc3951d52de568fe1",
+      "original_uri": "file:///Users/georjo/uni/%D1%81%D0%B5%D0%BC7/mlops/hw6-7/data/eval/training-index.jsonl"
+    },
+    "MLmodel": {
+      "path": "sources/MLmodel",
+      "sha256": "9a758bb680b968e563fedbc6a3ccfe0298b861c1a8d13ff195fabddca21f68b2",
+      "original_uri": "file:///private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp19ctp931/MLmodel"
+    }
+  },
+  "source_verified": true,
+  "behavioral": {
+    "n": 3,
+    "correct": 2,
+    "valid": 3,
+    "errors": 0,
+    "accuracy": 0.6666666666666666,
+    "format_rate": 1.0
+  },
+  "failed_behavior": [
+    "behavior-refusal"
+  ],
+  "disposition": "rejected"
+}

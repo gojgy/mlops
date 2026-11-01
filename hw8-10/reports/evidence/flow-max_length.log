@@ -1,0 +1,15 @@
+$ flow.py --workspace /Users/georjo/uni/сем7/mlops/hw8-10/context/flow-check
+PREPARED bf6540fc753945eb757584d9bfa5a2f2c40d5fe4c99bf6f785908a936a374414
+PREPARATION_STATE Completed
+{"prepared": {"sha256": "bf6540fc753945eb757584d9bfa5a2f2c40d5fe4c99bf6f785908a936a374414", "rows": 1}, "artifact": {"uri": "/Users/georjo/uni/сем7/mlops/hw8-10/context/flow-check/manifest-B.json", "manifest_sha256": "eb68031841d56bb7ad4ba0f14021b2e2ad4fdf7ab00c1af2c5473c69c21eb10c", "model_id": "fixture-B", "model_sha256": "b465d64e69349bc093704300fae82ec29d6c6fc678e51c56b59d82e885a225fa"}, "result": {"publication_id": "330dceb4a062a6dbd7d2b1068989621f0aa10ac463e74ea41f90b97a2d318eda", "model_id": "fixture-B", "model_sha256": "b465d64e69349bc093704300fae82ec29d6c6fc678e51c56b59d82e885a225fa", "runtime_sha256": "bc7bd5a4806e2e0e3b8569666b251d6c59a8d8e01e37fc37bf95b534023ca547", "evaluation_run_id": "fixture-eval-B", "target": "/Users/georjo/uni/сем7/mlops/hw8-10/context/flow-check/accepted.json"}}
+22:15:24.783 | INFO    | prefect - Starting temporary server on http://127.0.0.1:8126
+See https://www.prefect.io/docs/v3/concepts/server#how-to-guides for more information on running a dedicated Prefect server.
+22:15:26.276 | INFO    | Flow run 'humorous-shrimp' - Beginning flow run 'humorous-shrimp' for flow 'model-release'
+22:15:26.284 | INFO    | Task run 'prepare-d08' - Finished in state Completed()
+22:15:26.292 | INFO    | Task run 'obtain-07a' - Finished in state Completed()
+22:15:26.294 | INFO    | Task run 'assess-fa0' - Finished in state Completed()
+22:15:26.297 | INFO    | Task run 'publish-1dd' - Finished in state Completed()
+22:15:27.292 | INFO    | Flow run 'humorous-shrimp' - Finished in state Completed()
+22:15:27.306 | INFO    | prefect - Stopping temporary server on http://127.0.0.1:8126
+
+exit_code=0

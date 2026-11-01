@@ -1,0 +1,320 @@
+[
+  {
+    "id": "arxiv:0804.0398",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 1.0298839169554412
+  },
+  {
+    "id": "arxiv:1003.0360",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.5762390419840813
+  },
+  {
+    "id": "arxiv:1006.1450",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.7411435411777347
+  },
+  {
+    "id": "arxiv:1207.0874",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.7051216249819845
+  },
+  {
+    "id": "arxiv:1104.5341",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.6286172501277179
+  },
+  {
+    "id": "arxiv:1210.0706",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.6881800410337746
+  },
+  {
+    "id": "arxiv:1203.6157",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.643868416082114
+  },
+  {
+    "id": "arxiv:1006.1433",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.5962968750391155
+  },
+  {
+    "id": "arxiv:0810.4902",
+    "raw": "{\"answer\":\"REFUSE\"}",
+    "error": null,
+    "latency_seconds": 0.6939083330798894
+  },
+  {
+    "id": "arxiv:1210.1190",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.5998496250249445
+  },
+  {
+    "id": "arxiv:1108.2228",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.6398317918647081
+  },
+  {
+    "id": "arxiv:0806.1139",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.5869494169019163
+  },
+  {
+    "id": "arxiv:1107.1547",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.599370582960546
+  },
+  {
+    "id": "arxiv:1109.3782",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.5809346667956561
+  },
+  {
+    "id": "arxiv:1110.0405",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.577219916973263
+  },
+  {
+    "id": "arxiv:1003.3629",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.5991358330938965
+  },
+  {
+    "id": "arxiv:1206.3260",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.6586165421176702
+  },
+  {
+    "id": "arxiv:1108.0453",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.5990017501171678
+  },
+  {
+    "id": "arxiv:1007.3829",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.5420353340450674
+  },
+  {
+    "id": "arxiv:0708.2377",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.5458568749018013
+  },
+  {
+    "id": "arxiv:0712.2184",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.6395940419752151
+  },
+  {
+    "id": "arxiv:1204.5981",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.6585134158376604
+  },
+  {
+    "id": "arxiv:0808.2670",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.6008815828245133
+  },
+  {
+    "id": "arxiv:1202.6504",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.6481222920119762
+  },
+  {
+    "id": "arxiv:1002.2450",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.5995474169030786
+  },
+  {
+    "id": "arxiv:0904.2144",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.6077982080169022
+  },
+  {
+    "id": "arxiv:1210.1928",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.5624187921639532
+  },
+  {
+    "id": "arxiv:0812.1615",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.5588719588704407
+  },
+  {
+    "id": "arxiv:0907.5494",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.59344079089351
+  },
+  {
+    "id": "arxiv:1202.3774",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.6071260417811573
+  },
+  {
+    "id": "arxiv:0907.3086",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.6220960421487689
+  },
+  {
+    "id": "arxiv:1204.2058",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.6640525420662016
+  },
+  {
+    "id": "arxiv:1004.3371",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.6181669160723686
+  },
+  {
+    "id": "arxiv:0710.5874",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.6279917079955339
+  },
+  {
+    "id": "arxiv:0803.3746",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.5945835830643773
+  },
+  {
+    "id": "arxiv:1211.2396",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.6057611668948084
+  },
+  {
+    "id": "arxiv:1110.2345",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.6891388748772442
+  },
+  {
+    "id": "arxiv:0809.2365",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.6251495000906289
+  },
+  {
+    "id": "arxiv:0908.0128",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.6166451668832451
+  },
+  {
+    "id": "arxiv:0805.3204",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.6141983331181109
+  },
+  {
+    "id": "arxiv:1202.2393",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.548783625010401
+  },
+  {
+    "id": "arxiv:1109.3322",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.5866712920833379
+  },
+  {
+    "id": "arxiv:1104.5687",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.5964973750524223
+  },
+  {
+    "id": "arxiv:1212.2393",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.5489433340262622
+  },
+  {
+    "id": "arxiv:1210.2972",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.532357209129259
+  },
+  {
+    "id": "arxiv:1004.5031",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.615530916955322
+  },
+  {
+    "id": "arxiv:0905.1608",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.6126389999408275
+  },
+  {
+    "id": "arxiv:1103.1130",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.576132790884003
+  },
+  {
+    "id": "arxiv:1006.4754",
+    "raw": "{\"answer\":\"A\"}",
+    "error": null,
+    "latency_seconds": 0.6334130000323057
+  },
+  {
+    "id": "arxiv:1205.6102",
+    "raw": "{\"answer\":\"B\"}",
+    "error": null,
+    "latency_seconds": 0.5954275000840425
+  },
+  {
+    "id": "behavior-format",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.6467431660275906
+  },
+  {
+    "id": "behavior-paraphrase",
+    "raw": "{\"answer\":\"C\"}",
+    "error": null,
+    "latency_seconds": 0.7184507921338081
+  },
+  {
+    "id": "behavior-refusal",
+    "raw": "{\n  \"answer\": \"B\"\n}",
+    "error": null,
+    "latency_seconds": 0.7110410421155393
+  }
+]

@@ -1,0 +1,795 @@
+test_changed_artifact_cannot_be_published (test_pipeline.PipelineTests.test_changed_artifact_cannot_be_published) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpjstpdl2j/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpjstpdl2j/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpjstpdl2j/workspace run
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+FAIL
+test_corrupt_cache_is_rebuilt (test_pipeline.PipelineTests.test_corrupt_cache_is_rebuilt) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpe179p1on/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpe179p1on/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpe179p1on/workspace run --fail-after-prepare
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 67, in run
+    if fail_after_prepare:raise RuntimeError('Инъекция сбоя после подготовки')
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpe179p1on/workspace run
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 66, in run
+    prepared=prepare(root)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 59, in prepare
+    result=read(entry);print('CACHE_HIT',result['input_sha256']);return result
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 22, in read
+    return json.loads(Path(path).read_text())
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+
+FAIL
+test_prepare_failure_cache_reuse_and_invalidation (test_pipeline.PipelineTests.test_prepare_failure_cache_reuse_and_invalidation) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp786vq9vd/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp786vq9vd/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp786vq9vd/workspace run --fail-after-prepare
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 67, in run
+    if fail_after_prepare:raise RuntimeError('Инъекция сбоя после подготовки')
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp786vq9vd/workspace run --fail-after-prepare
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 67, in run
+    if fail_after_prepare:raise RuntimeError('Инъекция сбоя после подготовки')
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp786vq9vd/workspace run --fail-after-prepare
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 67, in run
+    if fail_after_prepare:raise RuntimeError('Инъекция сбоя после подготовки')
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Инъекция сбоя после подготовки
+
+FAIL
+test_rejected_incomplete_and_foreign_reports_preserve_pointer (test_pipeline.PipelineTests.test_rejected_incomplete_and_foreign_reports_preserve_pointer) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmplgll1x_1/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmplgll1x_1/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmplgll1x_1/workspace run --report report-reject.json
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 69, in run
+    release.publish(manifest,report,root/'accepted.json')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/release.py", line 17, in publish
+    validate_release(manifest, report)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/release.py", line 13, in validate_release
+    raise ValueError('Кандидат отклонён')
+ValueError: Кандидат отклонён
+
+accepted SHA-256: aca0bc1332936349f868b84d800dec94e1a042f4aec3196fe4c4c031c3b5c6d1 aca0bc1332936349f868b84d800dec94e1a042f4aec3196fe4c4c031c3b5c6d1
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmplgll1x_1/workspace run --report report-incomplete.json
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+
+  test_rejected_incomplete_and_foreign_reports_preserve_pointer (test_pipeline.PipelineTests.test_rejected_incomplete_and_foreign_reports_preserve_pointer) (report='report-incomplete.json') ... FAIL
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmplgll1x_1/workspace run --report report-A.json
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+  test_rejected_incomplete_and_foreign_reports_preserve_pointer (test_pipeline.PipelineTests.test_rejected_incomplete_and_foreign_reports_preserve_pointer) (report='report-A.json') ... FAIL
+test_repeat_recovers_pointer_journal_gap (test_pipeline.PipelineTests.test_repeat_recovers_pointer_journal_gap) ... $lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpf164xp9c/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpf164xp9c/workspace
+
+$-c import sys
+import lab
+original = lab.release.publish
+def fail(*args, **kwargs):
+    original(*args, **kwargs)
+    raise RuntimeError('Сбой между указателем и журналом')
+lab.release.publish = fail
+sys.argv = ['lab.py', '--workspace', sys.argv[1], 'run']
+lab.main()
+ /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpf164xp9c/workspace
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "<string>", line 9, in <module>
+    lab.main()
+    ~~~~~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 69, in run
+    release.publish(manifest,report,root/'accepted.json')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 6, in fail
+    raise RuntimeError('Сбой между указателем и журналом')
+RuntimeError: Сбой между указателем и журналом
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpf164xp9c/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpf164xp9c/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+FAIL
+
+======================================================================
+FAIL: test_changed_artifact_cannot_be_published (test_pipeline.PipelineTests.test_changed_artifact_cannot_be_published)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 105, in test_changed_artifact_cannot_be_published
+    self.cli('run', success=False)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 35, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 31, in process
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+
+======================================================================
+FAIL: test_corrupt_cache_is_rebuilt (test_pipeline.PipelineTests.test_corrupt_cache_is_rebuilt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 98, in test_corrupt_cache_is_rebuilt
+    result = self.cli('run')
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 35, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 29, in process
+    self.assertEqual(result.returncode, 0, result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 66, in run
+    prepared=prepare(root)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 59, in prepare
+    result=read(entry);print('CACHE_HIT',result['input_sha256']);return result
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/lab.py", line 22, in read
+    return json.loads(Path(path).read_text())
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+
+
+======================================================================
+FAIL: test_prepare_failure_cache_reuse_and_invalidation (test_pipeline.PipelineTests.test_prepare_failure_cache_reuse_and_invalidation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 65, in test_prepare_failure_cache_reuse_and_invalidation
+    self.assertIn('PREPARED', changed.stdout, 'Изменённые байты использовали старый кеш')
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PREPARED' not found in 'CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4\n' : Изменённые байты использовали старый кеш
+
+======================================================================
+FAIL: test_rejected_incomplete_and_foreign_reports_preserve_pointer (test_pipeline.PipelineTests.test_rejected_incomplete_and_foreign_reports_preserve_pointer) (report='report-incomplete.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 51, in test_rejected_incomplete_and_foreign_reports_preserve_pointer
+    self.cli('run', '--report', report, success=False)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 35, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 31, in process
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+
+======================================================================
+FAIL: test_rejected_incomplete_and_foreign_reports_preserve_pointer (test_pipeline.PipelineTests.test_rejected_incomplete_and_foreign_reports_preserve_pointer) (report='report-A.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 51, in test_rejected_incomplete_and_foreign_reports_preserve_pointer
+    self.cli('run', '--report', report, success=False)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 35, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 31, in process
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+
+======================================================================
+FAIL: test_repeat_recovers_pointer_journal_gap (test_pipeline.PipelineTests.test_repeat_recovers_pointer_journal_gap)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/tests/test_pipeline.py", line 92, in test_repeat_recovers_pointer_journal_gap
+    self.assertEqual(len(self.events()), 1, 'Повтор создал дубликат публикации')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1 : Повтор создал дубликат публикации
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.840s
+
+FAILED (failures=6)
+
+Дополнительный прогон на изолированной копии release.py/lab.py из bc5959d.
+Новые флаги и новые функции не используются как доказательство дефекта.
+Команда: /opt/homebrew/opt/python@3.13/bin/python3.13 -m unittest -v tests.test_pipeline.PipelineTests.test_changed_artifact_cannot_be_published tests.test_pipeline.PipelineTests.test_corrupt_cache_is_rebuilt tests.test_pipeline.PipelineTests.test_prepare_failure_cache_reuse_and_invalidation tests.test_pipeline.PipelineTests.test_rejected_incomplete_and_foreign_reports_preserve_pointer tests.test_pipeline.PipelineTests.test_repeat_recovers_pointer_journal_gap tests.test_pipeline.PipelineTests.test_new_evaluation_and_runtime_have_distinct_publications tests.test_pipeline.PipelineTests.test_file_uri_snapshot_symlink_and_missing_file tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows tests.test_pipeline.PipelineTests.test_nan_and_disk_failure_preserve_pointer_hash
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpyaur5_53/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpyaur5_53/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpyaur5_53/workspace run
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpmm08wxna/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpmm08wxna/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpmm08wxna/workspace run --fail-after-prepare
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 67, in run
+    if fail_after_prepare:raise RuntimeError('Инъекция сбоя после подготовки')
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpmm08wxna/workspace run
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 66, in run
+    prepared=prepare(root)
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 59, in prepare
+    result=read(entry);print('CACHE_HIT',result['input_sha256']);return result
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 22, in read
+    return json.loads(Path(path).read_text())
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp2i3pfuf9/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp2i3pfuf9/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp2i3pfuf9/workspace run --fail-after-prepare
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 67, in run
+    if fail_after_prepare:raise RuntimeError('Инъекция сбоя после подготовки')
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp2i3pfuf9/workspace run --fail-after-prepare
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 67, in run
+    if fail_after_prepare:raise RuntimeError('Инъекция сбоя после подготовки')
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp2i3pfuf9/workspace run --fail-after-prepare
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 67, in run
+    if fail_after_prepare:raise RuntimeError('Инъекция сбоя после подготовки')
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Инъекция сбоя после подготовки
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp_8iz_sc6/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp_8iz_sc6/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp_8iz_sc6/workspace run --report report-reject.json
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 69, in run
+    release.publish(manifest,report,root/'accepted.json')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/release.py", line 17, in publish
+    validate_release(manifest, report)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/release.py", line 13, in validate_release
+    raise ValueError('Кандидат отклонён')
+ValueError: Кандидат отклонён
+
+accepted SHA-256: aca0bc1332936349f868b84d800dec94e1a042f4aec3196fe4c4c031c3b5c6d1 aca0bc1332936349f868b84d800dec94e1a042f4aec3196fe4c4c031c3b5c6d1
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp_8iz_sc6/workspace run --report report-incomplete.json
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp_8iz_sc6/workspace run --report report-A.json
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp48_7aurp/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp48_7aurp/workspace
+
+$-c import sys
+import lab
+original = lab.release.publish
+def fail(*args, **kwargs):
+    original(*args, **kwargs)
+    raise RuntimeError('Сбой между указателем и журналом')
+lab.release.publish = fail
+sys.argv = ['lab.py', '--workspace', sys.argv[1], 'run']
+lab.main()
+ /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp48_7aurp/workspace
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+Traceback (most recent call last):
+  File "<string>", line 9, in <module>
+    lab.main()
+    ~~~~~~~~^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 69, in run
+    release.publish(manifest,report,root/'accepted.json')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 6, in fail
+    raise RuntimeError('Сбой между указателем и журналом')
+RuntimeError: Сбой между указателем и журналом
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp48_7aurp/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp48_7aurp/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmppc7uzrzc/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmppc7uzrzc/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmppc7uzrzc/workspace run
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmppc7uzrzc/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmppc7uzrzc/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmppc7uzrzc/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp5grlmhd6/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp5grlmhd6/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp5grlmhd6/workspace run
+PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmp5grlmhd6/workspace run
+CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpzqc6nvgn/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpzqc6nvgn/workspace
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpzqc6nvgn/workspace run
+PREPARED 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpzqc6nvgn/workspace run
+CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpzqc6nvgn/workspace run
+CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpzqc6nvgn/workspace run
+CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpzqc6nvgn/workspace run
+CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpzqc6nvgn/workspace run
+CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpzqc6nvgn/workspace run
+CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpzqc6nvgn/workspace run
+CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+$lab.py --workspace /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpdcxhr8le/workspace init
+Создан синтетический стенд: /var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpdcxhr8le/workspace
+
+NaN SHA-256 до/после: aca0bc1332936349f868b84d800dec94e1a042f4aec3196fe4c4c031c3b5c6d1 0bb6ec1a07f2c71016d90b62af8865121cb2b7b4bc8d6cd5d0336af99ad0a7d3
+Ошибка диска SHA-256 до/после: aca0bc1332936349f868b84d800dec94e1a042f4aec3196fe4c4c031c3b5c6d1 0bb6ec1a07f2c71016d90b62af8865121cb2b7b4bc8d6cd5d0336af99ad0a7d3
+test_changed_artifact_cannot_be_published (tests.test_pipeline.PipelineTests.test_changed_artifact_cannot_be_published) ... FAIL
+test_corrupt_cache_is_rebuilt (tests.test_pipeline.PipelineTests.test_corrupt_cache_is_rebuilt) ... FAIL
+test_prepare_failure_cache_reuse_and_invalidation (tests.test_pipeline.PipelineTests.test_prepare_failure_cache_reuse_and_invalidation) ... FAIL
+test_rejected_incomplete_and_foreign_reports_preserve_pointer (tests.test_pipeline.PipelineTests.test_rejected_incomplete_and_foreign_reports_preserve_pointer) ...
+  test_rejected_incomplete_and_foreign_reports_preserve_pointer (tests.test_pipeline.PipelineTests.test_rejected_incomplete_and_foreign_reports_preserve_pointer) (report='report-incomplete.json') ... FAIL
+  test_rejected_incomplete_and_foreign_reports_preserve_pointer (tests.test_pipeline.PipelineTests.test_rejected_incomplete_and_foreign_reports_preserve_pointer) (report='report-A.json') ... FAIL
+test_repeat_recovers_pointer_journal_gap (tests.test_pipeline.PipelineTests.test_repeat_recovers_pointer_journal_gap) ... FAIL
+test_new_evaluation_and_runtime_have_distinct_publications (tests.test_pipeline.PipelineTests.test_new_evaluation_and_runtime_have_distinct_publications) ... FAIL
+test_file_uri_snapshot_symlink_and_missing_file (tests.test_pipeline.PipelineTests.test_file_uri_snapshot_symlink_and_missing_file) ... FAIL
+test_jsonl_preparation_rejects_invalid_rows (tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows) ...
+  test_jsonl_preparation_rejects_invalid_rows (tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows) (changes={'id': ''}) ... FAIL
+  test_jsonl_preparation_rejects_invalid_rows (tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows) (changes={'input': ' '}) ... FAIL
+  test_jsonl_preparation_rejects_invalid_rows (tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows) (changes={'choices': []}) ... FAIL
+  test_jsonl_preparation_rejects_invalid_rows (tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows) (changes={'choices': 'A'}) ... FAIL
+  test_jsonl_preparation_rejects_invalid_rows (tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows) (changes={'expected': 'other'}) ... FAIL
+test_jsonl_preparation_rejects_invalid_rows (tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows) ... FAIL
+test_nan_and_disk_failure_preserve_pointer_hash (tests.test_pipeline.PipelineTests.test_nan_and_disk_failure_preserve_pointer_hash) ...
+  test_nan_and_disk_failure_preserve_pointer_hash (tests.test_pipeline.PipelineTests.test_nan_and_disk_failure_preserve_pointer_hash) (name='NaN') ... FAIL
+  test_nan_and_disk_failure_preserve_pointer_hash (tests.test_pipeline.PipelineTests.test_nan_and_disk_failure_preserve_pointer_hash) (name='Ошибка диска') ... FAIL
+
+======================================================================
+FAIL: test_changed_artifact_cannot_be_published (tests.test_pipeline.PipelineTests.test_changed_artifact_cannot_be_published)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 118, in test_changed_artifact_cannot_be_published
+    self.cli('run', success=False)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 44, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 40, in process
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : PREPARED 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+
+======================================================================
+FAIL: test_corrupt_cache_is_rebuilt (tests.test_pipeline.PipelineTests.test_corrupt_cache_is_rebuilt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 111, in test_corrupt_cache_is_rebuilt
+    result = self.cli('run')
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 44, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 38, in process
+    self.assertEqual(result.returncode, 0, result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 84, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 81, in main
+    else:run(args.workspace,args.report,args.fail_after_prepare)
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 66, in run
+    prepared=prepare(root)
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 59, in prepare
+    result=read(entry);print('CACHE_HIT',result['input_sha256']);return result
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/lab.py", line 22, in read
+    return json.loads(Path(path).read_text())
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+
+
+======================================================================
+FAIL: test_prepare_failure_cache_reuse_and_invalidation (tests.test_pipeline.PipelineTests.test_prepare_failure_cache_reuse_and_invalidation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 74, in test_prepare_failure_cache_reuse_and_invalidation
+    self.assertIn('PREPARED', changed.stdout, 'Изменённые байты использовали старый кеш')
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PREPARED' not found in 'CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4\n' : Изменённые байты использовали старый кеш
+
+======================================================================
+FAIL: test_rejected_incomplete_and_foreign_reports_preserve_pointer (tests.test_pipeline.PipelineTests.test_rejected_incomplete_and_foreign_reports_preserve_pointer) (report='report-incomplete.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 60, in test_rejected_incomplete_and_foreign_reports_preserve_pointer
+    self.cli('run', '--report', report, success=False)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 44, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 40, in process
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+
+======================================================================
+FAIL: test_rejected_incomplete_and_foreign_reports_preserve_pointer (tests.test_pipeline.PipelineTests.test_rejected_incomplete_and_foreign_reports_preserve_pointer) (report='report-A.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 60, in test_rejected_incomplete_and_foreign_reports_preserve_pointer
+    self.cli('run', '--report', report, success=False)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 44, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 40, in process
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+
+======================================================================
+FAIL: test_repeat_recovers_pointer_journal_gap (tests.test_pipeline.PipelineTests.test_repeat_recovers_pointer_journal_gap)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 105, in test_repeat_recovers_pointer_journal_gap
+    self.assertEqual(len(self.events()), 1, 'Повтор создал дубликат публикации')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1 : Повтор создал дубликат публикации
+
+======================================================================
+FAIL: test_new_evaluation_and_runtime_have_distinct_publications (tests.test_pipeline.PipelineTests.test_new_evaluation_and_runtime_have_distinct_publications)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 150, in test_new_evaluation_and_runtime_have_distinct_publications
+    self.assertEqual(len(self.events()), 3)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 4 != 3
+
+======================================================================
+FAIL: test_file_uri_snapshot_symlink_and_missing_file (tests.test_pipeline.PipelineTests.test_file_uri_snapshot_symlink_and_missing_file)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 169, in test_file_uri_snapshot_symlink_and_missing_file
+    self.cli('run', success=False)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 44, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 40, in process
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : CACHE_HIT 88bbd559a04a7a432693a1c611ef2704bb711ac17dd5e22203ee9e5020f59fd4
+PUBLISHED fixture-B
+
+
+======================================================================
+FAIL: test_jsonl_preparation_rejects_invalid_rows (tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows) (changes={'id': ''})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 191, in test_jsonl_preparation_rejects_invalid_rows
+    self.cli('run', success=False)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 44, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 40, in process
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+
+======================================================================
+FAIL: test_jsonl_preparation_rejects_invalid_rows (tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows) (changes={'input': ' '})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 191, in test_jsonl_preparation_rejects_invalid_rows
+    self.cli('run', success=False)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 44, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 40, in process
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+
+======================================================================
+FAIL: test_jsonl_preparation_rejects_invalid_rows (tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows) (changes={'choices': []})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 191, in test_jsonl_preparation_rejects_invalid_rows
+    self.cli('run', success=False)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 44, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 40, in process
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+
+======================================================================
+FAIL: test_jsonl_preparation_rejects_invalid_rows (tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows) (changes={'choices': 'A'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 191, in test_jsonl_preparation_rejects_invalid_rows
+    self.cli('run', success=False)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 44, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 40, in process
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+
+======================================================================
+FAIL: test_jsonl_preparation_rejects_invalid_rows (tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows) (changes={'expected': 'other'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 191, in test_jsonl_preparation_rejects_invalid_rows
+    self.cli('run', success=False)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 44, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 40, in process
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+
+======================================================================
+FAIL: test_jsonl_preparation_rejects_invalid_rows (tests.test_pipeline.PipelineTests.test_jsonl_preparation_rejects_invalid_rows)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 193, in test_jsonl_preparation_rejects_invalid_rows
+    self.cli('run', success=False)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 44, in cli
+    return self.process(['lab.py', '--workspace', str(self.root), *args], success)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 40, in process
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : CACHE_HIT 4377a3d5a76826fd118db0ed7669cffadbe3f0f4eada1bcbc072a1bd19a91aaf
+PUBLISHED fixture-B
+
+
+======================================================================
+FAIL: test_nan_and_disk_failure_preserve_pointer_hash (tests.test_pipeline.PipelineTests.test_nan_and_disk_failure_preserve_pointer_hash) (name='NaN')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 232, in test_nan_and_disk_failure_preserve_pointer_hash
+    self.assertIsInstance(caught, expected_error)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None is not an instance of <class 'ValueError'>
+
+======================================================================
+FAIL: test_nan_and_disk_failure_preserve_pointer_hash (tests.test_pipeline.PipelineTests.test_nan_and_disk_failure_preserve_pointer_hash) (name='Ошибка диска')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/qd/g12xm0c10vjdxkylpsqk09zr0000gn/T/tmpq7b4ugt0/tests/test_pipeline.py", line 232, in test_nan_and_disk_failure_preserve_pointer_hash
+    self.assertIsInstance(caught, expected_error)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None is not an instance of <class 'OSError'>
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.194s
+
+FAILED (failures=16)
+Код выхода: 1

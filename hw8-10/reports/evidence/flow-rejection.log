@@ -1,0 +1,124 @@
+$ flow.py --workspace /Users/georjo/uni/сем7/mlops/hw8-10/context/flow-check --report report-reject.json
+PREPARATION_STATE Cached
+22:15:32.920 | INFO    | prefect - Starting temporary server on http://127.0.0.1:8714
+See https://www.prefect.io/docs/v3/concepts/server#how-to-guides for more information on running a dedicated Prefect server.
+22:15:34.521 | INFO    | Flow run 'calm-jellyfish' - Beginning flow run 'calm-jellyfish' for flow 'model-release'
+22:15:34.529 | INFO    | Task run 'prepare-1b6' - Finished in state Cached(type=COMPLETED)
+22:15:34.538 | INFO    | Task run 'obtain-81e' - Finished in state Completed()
+22:15:34.540 | ERROR   | Task run 'assess-103' - Task run failed with exception: ValueError('Оценка не завершена или кандидат отклонён')
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 1058, in run_context
+    yield self
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 1755, in run_task_sync
+    engine.call_task_fn(txn)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 1075, in call_task_fn
+    result = call_with_parameters(self.task.fn, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/utilities/callables/__init__.py", line 404, in call_with_parameters
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/flow.py", line 49, in assess
+    release.validate_release(manifest, report)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/release.py", line 58, in validate_release
+    raise ValueError('Оценка не завершена или кандидат отклонён')
+ValueError: Оценка не завершена или кандидат отклонён
+22:15:34.544 | ERROR   | Task run 'assess-103' - Finished in state Failed('Task run encountered an exception ValueError: Оценка не завершена или кандидат отклонён')
+22:15:35.530 | ERROR   | Flow run 'calm-jellyfish' - Encountered exception during execution: ValueError('Оценка не завершена или кандидат отклонён')
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 1339, in run_context
+    yield self
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 2133, in run_flow_sync
+    engine.call_flow_fn()
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 1361, in call_flow_fn
+    result = call_with_parameters(self.flow.fn, self.parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/utilities/callables/__init__.py", line 404, in call_with_parameters
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/flow.py", line 71, in run
+    decision = assess(root, artifact, report_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/tasks.py", line 1240, in __call__
+    return run_task(
+           ^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 1988, in run_task
+    return run_task_sync(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 1758, in run_task_sync
+    return engine.state if return_type == "state" else engine.result()
+                                                       ^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 622, in result
+    raise self._raised
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 1058, in run_context
+    yield self
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 1755, in run_task_sync
+    engine.call_task_fn(txn)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 1075, in call_task_fn
+    result = call_with_parameters(self.task.fn, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/utilities/callables/__init__.py", line 404, in call_with_parameters
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/flow.py", line 49, in assess
+    release.validate_release(manifest, report)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/release.py", line 58, in validate_release
+    raise ValueError('Оценка не завершена или кандидат отклонён')
+ValueError: Оценка не завершена или кандидат отклонён
+22:15:35.626 | INFO    | Flow run 'calm-jellyfish' - Finished in state Failed('Flow run encountered an exception: ValueError: Оценка не завершена или кандидат отклонён')
+Traceback (most recent call last):
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/flow.py", line 83, in <module>
+    print(json.dumps(run(str(args.workspace), args.manifest, args.report, args.fail_after_prepare), ensure_ascii=False))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flows.py", line 1887, in __call__
+    return run_flow(
+           ^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 2290, in run_flow
+    ret_val = run_flow_sync(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 2135, in run_flow_sync
+    return engine.state if return_type == "state" else engine.result()
+                                                       ^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 788, in result
+    raise self._raised
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 1339, in run_context
+    yield self
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 2133, in run_flow_sync
+    engine.call_flow_fn()
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/flow_engine.py", line 1361, in call_flow_fn
+    result = call_with_parameters(self.flow.fn, self.parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/utilities/callables/__init__.py", line 404, in call_with_parameters
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/flow.py", line 71, in run
+    decision = assess(root, artifact, report_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/tasks.py", line 1240, in __call__
+    return run_task(
+           ^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 1988, in run_task
+    return run_task_sync(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 1758, in run_task_sync
+    return engine.state if return_type == "state" else engine.result()
+                                                       ^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 622, in result
+    raise self._raised
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 1058, in run_context
+    yield self
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 1755, in run_task_sync
+    engine.call_task_fn(txn)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/task_engine.py", line 1075, in call_task_fn
+    result = call_with_parameters(self.task.fn, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/.venv/lib/python3.12/site-packages/prefect/utilities/callables/__init__.py", line 404, in call_with_parameters
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/flow.py", line 49, in assess
+    release.validate_release(manifest, report)
+  File "/Users/georjo/uni/сем7/mlops/hw8-10/release.py", line 58, in validate_release
+    raise ValueError('Оценка не завершена или кандидат отклонён')
+ValueError: Оценка не завершена или кандидат отклонён
+22:15:35.652 | INFO    | prefect - Stopping temporary server on http://127.0.0.1:8714
+
+exit_code=1

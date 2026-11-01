@@ -1,0 +1,28 @@
+{
+  "run_id": "2cb560671fec4abdb03bafdb131d89ee",
+  "url": "http://127.0.0.1:8091",
+  "inputs": "/Users/georjo/uni/сем7/mlops/hw8-10/context/real/input.jsonl",
+  "input_sha256": "b2ba1d8e5d2249c4f3cbd7163cfb6f6c650d09be04a5b853b25e42d90757d340",
+  "manifest_sha256": "07f3eb0e4574a47994ba246b0c6117e17cfe521f205db43d0ce837dd429fd325",
+  "model_id": "Qwen3-1.7B-70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "runtime_sha256": "c343b9882d36fc7477fb828d72151213e83326d0f890da0b405f259150c20030",
+  "request_ids": [
+    "arxiv:0804.0398",
+    "arxiv:1003.0360",
+    "arxiv:1006.1450",
+    "arxiv:1207.0874",
+    "arxiv:1104.5341",
+    "arxiv:1210.0706",
+    "arxiv:1203.6157",
+    "arxiv:1006.1433"
+  ],
+  "max_new_tokens": 32,
+  "timeout_seconds": 180,
+  "concurrency": [
+    1,
+    2
+  ],
+  "retries": 0,
+  "started_at": "2026-11-01T19:14:06.699793+00:00",
+  "note": "Полная клиентская задержка; TTFT, ITL и устойчивый p95 не измеряются."
+}
