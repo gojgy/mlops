@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hw11-api
+spec:
+  {{- if not .Values.hpa }}
+  replicas: {{ .Values.replicas }}
+  {{- end }}
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: {maxSurge: 1, maxUnavailable: 0}
+  selector:
+    matchLabels: {app: hw11-api}
+  template:
+    metadata:
+      labels: {app: hw11-api}
+    spec:
+      terminationGracePeriodSeconds: 40
+      containers:
+        - name: api
+          image: {{ .Values.image }}
+          imagePullPolicy: Never
+          ports: [{name: http, containerPort: 8000}]
+          resources: {{ .Values.resources | toJson }}
+          env:
+            - name: POD_NAME
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
+            - {name: MODEL_PATH, value: {{ printf "/models/%s.json" .Values.model | quote }} }
+            - {name: MODEL_SHA256, value: {{ .Files.Get (printf "files/%s.json" .Values.model) | sha256sum | quote }} }
+            - {name: WARMUP_SECONDS, value: {{ .Values.warmupSeconds | quote }} }
+            - {name: NEVER_READY, value: {{ .Values.neverReady | quote }} }
+            - {name: CONCURRENCY, value: {{ .Values.concurrency | quote }} }
+            - {name: QUEUE_SIZE, value: {{ .Values.queueSize | quote }} }
+            - {name: CACHE_SIZE, value: {{ .Values.cacheSize | quote }} }
+            - {name: HIT_CPU_SECONDS, value: {{ .Values.hitCPU | quote }} }
+            - {name: MISS_CPU_SECONDS, value: {{ .Values.missCPU | quote }} }
+            - {name: CHUNK_SECONDS, value: {{ .Values.chunkSeconds | quote }} }
+          startupProbe:
+            httpGet: {path: /ready, port: http}
+            periodSeconds: 1
+            failureThreshold: 90
+          readinessProbe:
+            httpGet: {path: /ready, port: http}
+            periodSeconds: 1
+          livenessProbe:
+            httpGet: {path: /health, port: http}
+            periodSeconds: 5
+            failureThreshold: 3
+          lifecycle:
+            preStop:
+              exec: {command: [python, -c, "import time; time.sleep(3)"]}
+          volumeMounts: [{name: models, mountPath: /models, readOnly: true}]
+      volumes:
+        - name: models
+          configMap: {name: hw11-models}
