@@ -1,0 +1,125 @@
+{
+  "passed": true,
+  "load_runs": [
+    {
+      "run": "load-even-affinity-1",
+      "n": 768,
+      "seconds": 121.08863496780396,
+      "outcomes": {
+        "success": 643,
+        "rejected": 125
+      }
+    },
+    {
+      "run": "load-even-affinity-2",
+      "n": 768,
+      "seconds": 121.0521330833435,
+      "outcomes": {
+        "success": 642,
+        "rejected": 126
+      }
+    },
+    {
+      "run": "load-even-affinity-3",
+      "n": 768,
+      "seconds": 121.16833472251892,
+      "outcomes": {
+        "success": 643,
+        "rejected": 125
+      }
+    },
+    {
+      "run": "load-even-plain-1",
+      "n": 768,
+      "seconds": 120.98787808418274,
+      "outcomes": {
+        "success": 762,
+        "rejected": 6
+      }
+    },
+    {
+      "run": "load-even-plain-2",
+      "n": 768,
+      "seconds": 120.19942927360535,
+      "outcomes": {
+        "success": 763,
+        "rejected": 5
+      }
+    },
+    {
+      "run": "load-even-plain-3",
+      "n": 768,
+      "seconds": 120.45449590682983,
+      "outcomes": {
+        "success": 761,
+        "rejected": 7
+      }
+    },
+    {
+      "run": "load-skew-affinity-1",
+      "n": 768,
+      "seconds": 121.02096557617188,
+      "outcomes": {
+        "success": 664,
+        "rejected": 104
+      }
+    },
+    {
+      "run": "load-skew-affinity-2",
+      "n": 768,
+      "seconds": 120.96987986564636,
+      "outcomes": {
+        "success": 663,
+        "rejected": 105
+      }
+    },
+    {
+      "run": "load-skew-affinity-3",
+      "n": 768,
+      "seconds": 120.93552756309509,
+      "outcomes": {
+        "success": 664,
+        "rejected": 104
+      }
+    },
+    {
+      "run": "load-skew-plain-1",
+      "n": 768,
+      "seconds": 120.42542695999146,
+      "outcomes": {
+        "success": 768
+      }
+    },
+    {
+      "run": "load-skew-plain-2",
+      "n": 768,
+      "seconds": 120.09089040756226,
+      "outcomes": {
+        "success": 768
+      }
+    },
+    {
+      "run": "load-skew-plain-3",
+      "n": 768,
+      "seconds": 120.16947293281555,
+      "outcomes": {
+        "success": 767,
+        "rejected": 1
+      }
+    }
+  ],
+  "identical_plans": true,
+  "matching_server_client_counts": true,
+  "alerts": {
+    "FirstChunkSlow": [
+      "firing",
+      "inactive",
+      "pending"
+    ],
+    "RejectionsHigh": [
+      "firing",
+      "inactive",
+      "pending"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hw11-clients
+spec:
+  clusterIP: None
+  selector: {app: hw11-client}
+  ports: [{port: 8000}]
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hw11-client
+spec:
+  serviceName: hw11-clients
+  replicas: 4
+  podManagementPolicy: Parallel
+  selector:
+    matchLabels: {app: hw11-client}
+  template:
+    metadata:
+      labels: {app: hw11-client}
+    spec:
+      terminationGracePeriodSeconds: 3
+      containers:
+        - name: client
+          image: {{ .Values.clientImage | default .Values.image }}
+          imagePullPolicy: Never
+          command: [python, -c, "import signal,sys,time; signal.signal(signal.SIGTERM,lambda *_:sys.exit(0)); time.sleep(86400)"]
+          resources:
+            requests: {cpu: 25m, memory: 40Mi}
+            limits: {cpu: 500m, memory: 128Mi}

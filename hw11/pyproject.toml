@@ -1,0 +1,7 @@
+[project]
+name = "mlops-hw11"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["fastapi==0.142.2", "uvicorn==0.54.0", "prometheus-client==0.26.0", "httpx==0.28.1", "pyyaml==6.0.3"]
+[project.optional-dependencies]
+analysis = ["matplotlib==3.10.8"]

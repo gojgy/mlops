@@ -1,0 +1,13 @@
+groups:
+  - name: hw11
+    rules:
+      - alert: FirstChunkSlow
+        expr: histogram_quantile(0.95, sum by (le) (rate(inference_first_chunk_seconds_bucket[1m]))) > 0.4 and sum(increase(inference_first_chunk_seconds_count[1m])) >= 10
+        for: 10s
+        labels: {severity: warning}
+        annotations: {summary: "Задержка первой части выше 0.4 с"}
+      - alert: RejectionsHigh
+        expr: sum(rate(inference_requests_total{status=~"rejected|unready|error"}[1m])) / sum(rate(inference_requests_total[1m])) > 0.1 and sum(increase(inference_requests_total[1m])) >= 20
+        for: 10s
+        labels: {severity: warning}
+        annotations: {summary: "Доля отказов выше 10%"}

@@ -1,0 +1,19 @@
+image: mlops-hw11:fixed
+replicas: 2
+model: A
+warmupSeconds: 20
+neverReady: false
+concurrency: 1
+queueSize: 4
+cacheSize: 4
+hitCPU: 0.08
+missCPU: 0.12
+chunkSeconds: 0.05
+resources:
+  requests: {cpu: 200m, memory: 96Mi}
+  limits: {cpu: "1", memory: 192Mi}
+hpa: false
+clientImage: mlops-hw11:fixed
+monitoring: true
+prometheusImage: prom/prometheus:v3.16.0@sha256:e04987641b57704f408e31f6373ba4138ecf27cb4a165d24aabb6c38fddd0f06
+grafanaImage: grafana/grafana:13.3.1@sha256:0615ec4fbd4072004b7d86b46ded63013a74b7d6eb1119273dd89e8fa25c13cf

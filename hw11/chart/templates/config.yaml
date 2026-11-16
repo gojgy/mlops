@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hw11-models
+data:
+  A.json: {{ .Files.Get "files/A.json" | quote }}
+  B.json: {{ .Files.Get "files/B.json" | quote }}
