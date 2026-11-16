@@ -1,0 +1,15 @@
+# p95 до первой части ответа по Pod
+histogram_quantile(0.95, sum by (le, pod) (rate(inference_first_chunk_seconds_bucket[1m])))
+# p95 полного ответа
+histogram_quantile(0.95, sum by (le, pod) (rate(inference_total_seconds_bucket[1m])))
+# Очередь и занятость
+inference_waiting
+inference_running
+# Успешные завершения/с и отказы/с
+sum by (pod) (rate(inference_requests_total{status="ok"}[1m]))
+sum by (pod, status) (rate(inference_requests_total{status!="ok"}[1m]))
+# CPU и RAM
+sum by (pod) (rate(container_cpu_usage_seconds_total{namespace="hw11",container="api"}[30s]))
+sum by (pod) (container_memory_working_set_bytes{namespace="hw11",container="api"})
+# Ready по состоянию Kubernetes API
+sum(hw11_pod_ready)

@@ -1,0 +1,22 @@
+{{- if .Values.hpa }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hw11-api
+spec:
+  scaleTargetRef: {apiVersion: apps/v1, kind: Deployment, name: hw11-api}
+  minReplicas: 2
+  maxReplicas: 3
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target: {type: Utilization, averageUtilization: 60}
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies: [{type: Pods, value: 1, periodSeconds: 15}]
+    scaleDown:
+      stabilizationWindowSeconds: 30
+      policies: [{type: Pods, value: 1, periodSeconds: 15}]
+{{- end }}

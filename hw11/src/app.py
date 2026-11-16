@@ -70,7 +70,8 @@ def health():
 
 @app.get('/ready')
 def ready():
-    return JSONResponse(dict(ready=True, backend_mode='simulated'), status_code=200)
+    return JSONResponse(dict(ready=backend.ready, backend_mode='simulated'),
+                        status_code=200 if backend.ready else 503)
 
 
 @app.get('/metrics')

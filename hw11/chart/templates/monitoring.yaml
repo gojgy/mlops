@@ -1,0 +1,154 @@
+{{- if .Values.monitoring }}
+apiVersion: v1
+kind: ServiceAccount
+metadata: {name: hw11-observer}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata: {name: hw11-observer}
+rules:
+  - apiGroups: [""]
+    resources: [pods]
+    verbs: [get, list, watch]
+  - apiGroups: [apps]
+    resources: [deployments]
+    verbs: [get, list, watch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: {name: hw11-observer}
+subjects: [{kind: ServiceAccount, name: hw11-observer}]
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: Role, name: hw11-observer}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata: {name: hw11-cadvisor}
+rules:
+  - apiGroups: [""]
+    resources: [nodes/proxy]
+    verbs: [get]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata: {name: hw11-cadvisor}
+subjects: [{kind: ServiceAccount, name: hw11-observer, namespace: hw11}]
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: ClusterRole, name: hw11-cadvisor}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata: {name: hw11-monitoring}
+data:
+  prometheus.yaml: |
+{{ .Files.Get "files/monitoring/prometheus.yaml" | indent 4 }}
+  alerts.yaml: |
+{{ .Files.Get "files/monitoring/alerts.yaml" | indent 4 }}
+  datasource.yaml: |
+{{ .Files.Get "files/monitoring/datasource.yaml" | indent 4 }}
+  provider.yaml: |
+{{ .Files.Get "files/monitoring/provider.yaml" | indent 4 }}
+  dashboard.json: |
+{{ .Files.Get "files/monitoring/dashboard.json" | indent 4 }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: hw11-observer}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: hw11-observer}
+  template:
+    metadata:
+      labels: {app: hw11-observer}
+    spec:
+      serviceAccountName: hw11-observer
+      containers:
+        - name: observer
+          image: {{ .Values.clientImage }}
+          imagePullPolicy: Never
+          command: [python, -m, src.status_exporter]
+          ports: [{name: metrics, containerPort: 9101}]
+          resources:
+            requests: {cpu: 25m, memory: 40Mi}
+            limits: {cpu: 200m, memory: 96Mi}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: hw11-prometheus}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: hw11-prometheus}
+  template:
+    metadata:
+      labels: {app: hw11-prometheus}
+    spec:
+      serviceAccountName: hw11-observer
+      securityContext: {fsGroup: 65534}
+      containers:
+        - name: prometheus
+          image: {{ .Values.prometheusImage }}
+          imagePullPolicy: IfNotPresent
+          args: ["--config.file=/etc/prometheus/prometheus.yaml", "--storage.tsdb.path=/prometheus", "--storage.tsdb.retention.time=2h", "--storage.tsdb.retention.size=256MB"]
+          ports: [{name: http, containerPort: 9090}]
+          resources:
+            requests: {cpu: 100m, memory: 192Mi}
+            limits: {cpu: 500m, memory: 512Mi}
+          volumeMounts:
+            - {name: config, mountPath: /etc/prometheus}
+            - {name: data, mountPath: /prometheus}
+      volumes:
+        - name: config
+          configMap: {name: hw11-monitoring}
+        - name: data
+          emptyDir: {sizeLimit: 512Mi}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: hw11-prometheus}
+spec:
+  selector: {app: hw11-prometheus}
+  ports: [{port: 9090}]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: hw11-grafana}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: hw11-grafana}
+  template:
+    metadata:
+      labels: {app: hw11-grafana}
+    spec:
+      securityContext: {fsGroup: 472}
+      containers:
+        - name: grafana
+          image: {{ .Values.grafanaImage }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: GF_AUTH_ANONYMOUS_ENABLED, value: "true"}
+            - {name: GF_AUTH_ANONYMOUS_ORG_ROLE, value: Viewer}
+            - {name: GF_ANALYTICS_REPORTING_ENABLED, value: "false"}
+            - {name: GF_ANALYTICS_CHECK_FOR_UPDATES, value: "false"}
+          ports: [{containerPort: 3000}]
+          resources:
+            requests: {cpu: 100m, memory: 128Mi}
+            limits: {cpu: 500m, memory: 384Mi}
+          volumeMounts:
+            - {name: data, mountPath: /var/lib/grafana}
+            - {name: config, mountPath: /etc/grafana/provisioning/datasources/default.yaml, subPath: datasource.yaml}
+            - {name: config, mountPath: /etc/grafana/provisioning/dashboards/default.yaml, subPath: provider.yaml}
+            - {name: config, mountPath: /var/lib/grafana/dashboards/hw11.json, subPath: dashboard.json}
+      volumes:
+        - name: config
+          configMap: {name: hw11-monitoring}
+        - name: data
+          emptyDir: {sizeLimit: 512Mi}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: hw11-grafana}
+spec:
+  selector: {app: hw11-grafana}
+  ports: [{port: 3000}]
+{{- end }}
